@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="start_color">#09152B</color>
+    <color name="end_color">#082753</color>
+
+<!--    Buttons-->
+    <color name="btn_primary_color">#D9D9D9</color>
+    <color name="btn_gmail_color">#D80808</color>
+    <color name="btn_phone_color">#2FB192</color>
+    <color name="btn_premitive_color">#E3E3E3</color>
+
+<!--    text-->
+    <color name="primery_text_color">#000000</color>
+    <color name="secondry_text_color">#686868</color>
+
+<!--    indicator color-->
+    <color name="selected_indicator">#F2FFFFFF</color>
+    <color name="not_selected_indicator">#A6FFFFFF</color>
+
+
+</resources>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1028535969610",
+    "project_id": "expancemanager-ab36c",
+    "storage_bucket": "expancemanager-ab36c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028535969610:android:658d7a4f1b7b04812e83b3",
+        "android_client_info": {
+          "package_name": "com.tenx.expancemanager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAVd3nTDdRh5AOf9ObxDjnBvkfXB7fHOc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

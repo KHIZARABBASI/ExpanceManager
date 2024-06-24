@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">ExpanceManager</string>
+    <string name="expense_manager">EXPENSE MANAGER</string>
+    <string name="slogan">Expense tracker  Budget Manager</string>
+    <string name="get_started">Get Started</string>
+    <string name="btn_e_mail">Sign in with e-mail</string>
+    <string name="btn_phone">Sign in with phone</string>
+    <string name="btn_gust">Sign in as a guest</string>
+    <string name="btn_google">Sign in with Google</string>
+    <string name="on_board">Effortlessly add transactions - groceries, bills, or
+anything in between. Experience hassle-free expense
+management right at your fingertips.</string>
+
+    <string name="currency_code">PKR(pk)</string>
+    <string name="country_name">Pakistan</string>
+    <string name="select_currency">Select your Currency</string>
+
+
+</resources>
