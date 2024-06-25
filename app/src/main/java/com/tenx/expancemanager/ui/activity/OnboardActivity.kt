@@ -13,7 +13,7 @@ import com.tenx.expancemanager.databinding.ActivityOnboardBinding
 
 class OnboardActivity : AppCompatActivity() {
 
-    lateinit var fragmentManager: FragmentManager
+    private lateinit var fragmentManager: FragmentManager
     private val binding :ActivityOnboardBinding by lazy {
         ActivityOnboardBinding.inflate(layoutInflater)
     }

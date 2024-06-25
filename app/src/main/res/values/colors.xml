@@ -19,5 +19,11 @@
     <color name="selected_indicator">#F2FFFFFF</color>
     <color name="not_selected_indicator">#A6FFFFFF</color>
 
+<!--    Spending color-->
+    <color name="spend">#CF6679</color>
+    <color name="earn">#437745</color>
+    <color name="balance">#4D4DBABA</color>
+    <color name="bn_backcolor">#0769D1</color>
+
 
 </resources>

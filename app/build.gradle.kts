@@ -59,4 +59,7 @@ dependencies {
 
     //indicator
     implementation("com.tbuonomo:dotsindicator:5.0")
+
+    //botom nav
+    implementation("com.google.android.material:material:1.3.0-alpha03")
 }

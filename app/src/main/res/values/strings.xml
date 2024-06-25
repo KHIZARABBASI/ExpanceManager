@@ -14,6 +14,18 @@ management right at your fingertips.</string>
     <string name="currency_code">PKR(pk)</string>
     <string name="country_name">Pakistan</string>
     <string name="select_currency">Select your Currency</string>
+    <string name="greet">Good Morning</string>
+    <string name="this_month">This Month</string>
+    <string name="spending">Spending</string>
+    <string name="income">Income</string>
+    <string name="balance">Balance: </string>
+    <string name="amount">$1012</string>
+    <string name="recent_transactions">Recent Transactions</string>
+    <string name="see_all">see all</string>
+    <string name="no_item_content">Your latest Transactions will appear here.\n
+Track your spending &amp; income.
+\n Start now.</string>
+    <string name="no_trans">No Transaction Yet</string>
 
 
 </resources>
