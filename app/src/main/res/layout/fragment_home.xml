@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.fragments.HomeFragment"
+    android:background="@drawable/background">
+
+    <!--    Profile Card-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:background="@drawable/profile_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Profile Picture -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/rv_profile"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:backgroundTint="#03000000"
+            app:cardCornerRadius="@dimen/_90sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_profile_pic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Greeting and Name -->
+        <TextView
+            android:id="@+id/greeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/khula"
+            android:text="@string/greet"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rv_profile" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/khula"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/greeting" />
+
+        <!-- Settings Icon -->
+        <ImageView
+            android:id="@+id/setting"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_40sdp"
+            android:src="@drawable/setting"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_profile" />
+
+        <!-- Search View -->
+        <SearchView
+            android:id="@+id/sv_search"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/setting" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:fontFamily="@font/khula"
+            android:text="@string/this_month"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/sv_search"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    Expense Section -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_spending"
+        android:layout_width="@dimen/_125sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@drawable/spend"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_arrow_spend"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:backgroundTint="#00437745"
+            app:cardCornerRadius="@dimen/_50sdp"
+            app:layout_constraintBottom_toBottomOf="@id/cl_spending"
+            app:layout_constraintStart_toStartOf="@+id/cl_spending"
+            app:layout_constraintTop_toTopOf="@+id/cl_spending">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_arrow_bg_spend"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_circle">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:src="@drawable/icon_up_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/cl_arrow_bg_spend"
+                    app:layout_constraintEnd_toEndOf="@id/cl_arrow_bg_spend"
+                    app:layout_constraintStart_toStartOf="@id/cl_arrow_bg_spend"
+                    app:layout_constraintTop_toTopOf="@id/cl_arrow_bg_spend" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Spendings Text -->
+        <TextView
+            android:id="@+id/tv_spending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/khula"
+            android:text="@string/spending"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/cv_arrow_spend"
+            app:layout_constraintTop_toTopOf="@id/cl_spending" />
+
+        <!-- Amount -->
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:fontFamily="@font/khula"
+            android:text="@string/amount"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/cv_arrow_spend"
+            app:layout_constraintTop_toBottomOf="@+id/tv_spending" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    Income Section -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_income"
+        android:layout_width="@dimen/_125sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:background="@drawable/income"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_arrow_income"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:backgroundTint="#00437745"
+            app:cardCornerRadius="@dimen/_50sdp"
+            app:layout_constraintBottom_toBottomOf="@id/cl_income"
+            app:layout_constraintStart_toStartOf="@+id/cl_income"
+            app:layout_constraintTop_toTopOf="@+id/cl_income">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_arrow_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_circle">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:src="@drawable/icon_up_arrow"
+                    app:layout_constraintBottom_toBottomOf="@id/cl_arrow_bg"
+                    app:layout_constraintEnd_toEndOf="@id/cl_arrow_bg"
+                    app:layout_constraintStart_toStartOf="@id/cl_arrow_bg"
+                    app:layout_constraintTop_toTopOf="@id/cl_arrow_bg" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Income Text -->
+        <TextView
+            android:id="@+id/tv_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/khula"
+            android:text="@string/income"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/cv_arrow_income"
+            app:layout_constraintTop_toTopOf="@id/cl_income" />
+
+        <!-- Amount -->
+        <TextView
+            android:id="@+id/tv_amount_income"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:fontFamily="@font/khula"
+            android:text="@string/amount"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/cv_arrow_income"
+            app:layout_constraintTop_toBottomOf="@+id/tv_income" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    total balance-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_balance"
+        android:layout_width="@dimen/_140sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@drawable/balance"
+        app:layout_constraintEnd_toEndOf="@id/cl_income"
+        app:layout_constraintStart_toStartOf="@id/cl_spending"
+        app:layout_constraintTop_toBottomOf="@+id/cl_income"
+        tools:layout_editor_absoluteX="211dp"
+        tools:layout_editor_absoluteY="221dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_balance"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:backgroundTint="#00437745"
+            app:cardCornerRadius="@dimen/_50sdp"
+            app:layout_constraintBottom_toBottomOf="@id/cl_balance"
+            app:layout_constraintStart_toStartOf="@+id/cl_balance"
+            app:layout_constraintTop_toTopOf="@+id/cl_balance">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_symbol_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_circle">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/dollar_sign"
+                    app:layout_constraintBottom_toBottomOf="@id/cl_symbol_bg"
+                    app:layout_constraintEnd_toEndOf="@id/cl_symbol_bg"
+                    app:layout_constraintStart_toStartOf="@id/cl_symbol_bg"
+                    app:layout_constraintTop_toTopOf="@id/cl_symbol_bg" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+        <!--balance text-->
+        <TextView
+            android:id="@+id/tv_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:fontFamily="@font/khula"
+            android:text="@string/balance"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/cv_balance"
+            app:layout_constraintTop_toTopOf="@id/cl_balance" />
+        <!--amount-->
+        <TextView
+            android:id="@+id/tv_amount_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:fontFamily="@font/khula"
+            android:text="@string/amount"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_balance"
+            app:layout_constraintTop_toTopOf="@+id/tv_balance" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <!--    title for transction-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_25sdp"
+        app:layout_constraintTop_toBottomOf="@id/cl_balance">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:fontFamily="@font/khula"
+            android:gravity="center"
+            android:text="@string/recent_transactions"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold"
+            app:flow_verticalAlign="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:gravity="center"
+            android:text="@string/see_all"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    recycler view-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_expanse_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+    <!--    no item view-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/corrdinate_bottom_nav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        >
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:layout_marginEnd="4dp"
+            android:src="@drawable/no_item"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.19999999" />
+
+        <TextView
+            android:id="@+id/no_trans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_trans"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:fontFamily="@font/khula"
+            android:textSize="@dimen/_16sdp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_item_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/no_trans"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:fontFamily="@font/khula"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
