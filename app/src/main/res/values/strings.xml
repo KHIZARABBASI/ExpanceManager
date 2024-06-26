@@ -26,6 +26,13 @@ management right at your fingertips.</string>
 Track your spending &amp; income.
 \n Start now.</string>
     <string name="no_trans">No Transaction Yet</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="analysis">Analysis\n</string>
+    <string name="accoun">Account</string>
+    <string name="more">More</string>
+    <string name="category">Shopping from Amazon</string>
+    <string name="date">12 jan 2020</string>
 
 
 </resources>

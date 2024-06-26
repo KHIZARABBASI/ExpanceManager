@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context=".ui.activity.DashboardActivity">
-
-    <!--    Profile Card-->
+<!--
+        Profile Card
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Profile Picture -->
+         Profile Picture
         <androidx.cardview.widget.CardView
             android:id="@+id/rv_profile"
             android:layout_width="@dimen/_70sdp"
@@ -39,7 +39,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.cardview.widget.CardView>
 
-        <!-- Greeting and Name -->
+         Greeting and Name
         <TextView
             android:id="@+id/greeting"
             android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/greeting" />
 
-        <!-- Settings Icon -->
+         Settings Icon
         <ImageView
             android:id="@+id/setting"
             android:layout_width="@dimen/_15sdp"
@@ -77,7 +77,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rv_profile" />
 
-        <!-- Search View -->
+         Search View
         <SearchView
             android:id="@+id/searchView"
             android:layout_width="@dimen/_150sdp"
@@ -99,7 +99,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--    Expense Section -->
+        Expense Section
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_spending"
         android:layout_width="@dimen/_125sdp"
@@ -139,7 +139,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Spendings Text -->
+         Spendings Text
         <TextView
             android:id="@+id/tv_spending"
             android:layout_width="wrap_content"
@@ -153,7 +153,7 @@
             app:layout_constraintStart_toEndOf="@+id/cv_arrow_spend"
             app:layout_constraintTop_toTopOf="@id/cl_spending" />
 
-        <!-- Amount -->
+         Amount
         <TextView
             android:id="@+id/tv_amount"
             android:layout_width="wrap_content"
@@ -168,7 +168,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_spending" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--    Income Section -->
+        Income Section
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_income"
         android:layout_width="@dimen/_125sdp"
@@ -208,7 +208,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Income Text -->
+         Income Text
         <TextView
             android:id="@+id/tv_income"
             android:layout_width="wrap_content"
@@ -222,7 +222,7 @@
             app:layout_constraintStart_toEndOf="@+id/cv_arrow_income"
             app:layout_constraintTop_toTopOf="@id/cl_income" />
 
-        <!-- Amount -->
+         Amount
         <TextView
             android:id="@+id/tv_amount_income"
             android:layout_width="wrap_content"
@@ -237,7 +237,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_income" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--    total balance-->
+        total balance
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_balance"
         android:layout_width="@dimen/_140sdp"
@@ -281,7 +281,7 @@
 
 
         </androidx.cardview.widget.CardView>
-        <!--balance text-->
+        balance text
         <TextView
             android:id="@+id/tv_balance"
             android:layout_width="wrap_content"
@@ -294,7 +294,7 @@
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@+id/cv_balance"
             app:layout_constraintTop_toTopOf="@id/cl_balance" />
-        <!--amount-->
+        amount
         <TextView
             android:id="@+id/tv_amount_balance"
             android:layout_width="wrap_content"
@@ -312,7 +312,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <!--    title for transction-->
+        title for transction
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
@@ -346,7 +346,7 @@
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--    recycler view-->
+        recycler view
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_expanse_list"
         android:layout_width="0dp"
@@ -357,10 +357,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
-    <!--    no item view-->
+        no item view
 
-
-    <!--    BottomAppBar -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
@@ -409,6 +407,17 @@
             android:fontFamily="@font/khula"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+        BottomAppBar
+
+    -->
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/corrdinate_bottom_nav"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/corrdinate_bottom_nav"
