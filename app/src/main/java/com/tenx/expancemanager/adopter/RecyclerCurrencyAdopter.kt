@@ -34,8 +34,7 @@ class RecyclerCurrencyAdopter(
         parent: ViewGroup,
         viewType: Int
     ): RecyclerCurrencyAdopter.ItemViewHolder {
-        val binding =
-            RowCurrencyLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = RowCurrencyLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return ItemViewHolder(binding)
     }

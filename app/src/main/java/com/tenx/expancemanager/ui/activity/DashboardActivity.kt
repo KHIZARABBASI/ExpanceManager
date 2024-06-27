@@ -1,6 +1,11 @@
 package com.tenx.expancemanager.ui.activity
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
+import android.view.Window
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -13,31 +18,36 @@ import com.tenx.expancemanager.ui.fragments.MoreFragment
 
 class DashboardActivity : AppCompatActivity() {
 
-    private val binding: ActivityDashboardBinding by lazy{
+    private val binding: ActivityDashboardBinding by lazy {
         ActivityDashboardBinding.inflate(layoutInflater)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
 
+        clickListner()
+
         loadFragment(HomeFragment())
         binding.bottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.home-> {
+            when (it.itemId) {
+                R.id.home -> {
                     loadFragment(HomeFragment())
                     true
                 }
 
-                R.id.analysis-> {
+                R.id.analysis -> {
                     loadFragment(AnalysisFragment())
                     true
                 }
-                R.id.accounts-> {
+
+                R.id.accounts -> {
                     loadFragment(AccountFragment())
                     true
                 }
-                R.id.more-> {
+
+                R.id.more -> {
                     loadFragment(MoreFragment())
                     true
                 }
@@ -51,9 +61,17 @@ class DashboardActivity : AppCompatActivity() {
         }
     }
 
+    private fun clickListner() {
+
+        binding.fab.setOnClickListener {
+           startActivity(Intent(this, UpdateFinanceActivity::class.java))
+        }
+
+    }
+
     private fun loadFragment(fragment: Fragment) {
         val transition = supportFragmentManager.beginTransaction()
-        transition.replace(R.id.container,fragment)
+        transition.replace(R.id.container, fragment)
         transition.commit()
 
     }

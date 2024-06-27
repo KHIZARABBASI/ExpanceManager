@@ -6,10 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/button_login"
     android:backgroundTint="@color/transection_background_colr"
-    android:layout_margin="@dimen/_12sdp">
+    android:layout_marginBottom="@dimen/_8sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
+        android:id="@+id/cl_card"
         android:layout_width="@dimen/_35sdp"
         android:layout_height="@dimen/_35sdp"
         android:layout_marginStart="@dimen/_15sdp"
@@ -19,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/iv_category"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/dollar_sign" />
@@ -36,8 +37,8 @@
         android:textSize="@dimen/_16sdp"
         android:layout_marginStart="@dimen/_12sdp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/constraintLayout4"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout4" />
+        app:layout_constraintStart_toEndOf="@+id/cl_card"
+        app:layout_constraintTop_toTopOf="@+id/cl_card" />
 
     <TextView
         android:id="@+id/tv_catagory"
@@ -48,24 +49,25 @@
         android:text="@string/category"
         android:textColor="@color/white"
         android:textSize="@dimen/_13sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout4"
-        app:layout_constraintStart_toEndOf="@+id/constraintLayout4"
+        app:layout_constraintBottom_toBottomOf="@+id/cl_card"
+        app:layout_constraintStart_toEndOf="@+id/cl_card"
         app:layout_constraintTop_toBottomOf="@+id/tv_amount" />
 
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_15sdp"
         android:fontFamily="@font/khula"
         android:text="@string/date"
         android:textColor="@color/white"
         android:textSize="@dimen/_13sdp"
         app:layout_constraintBottom_toTopOf="@+id/tv_catagory"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_catagory"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:id="@+id/iv_payment_method"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
         app:layout_constraintEnd_toEndOf="@+id/tv_date"

@@ -29,10 +29,23 @@ Track your spending &amp; income.
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="analysis">Analysis\n</string>
-    <string name="accoun">Account</string>
+    <string name="account">Account</string>
     <string name="more">More</string>
     <string name="category">Shopping from Amazon</string>
     <string name="date">12 jan 2020</string>
+    <string name="time">09:10 AM</string>
+    <string name="backup">Backup Now</string>
+    <string name="transaction">Transaction</string>
+    <string name="Scheduled_trx">Scheduled Txns</string>
+    <string name="budgets">Budgets</string>
+    <string name="categories">category</string>
+    <string name="tags">Tags</string>
+    <string name="premium">Premium</string>
+    <string name="title_add_trax">Add transaction</string>
+    <string name="txt_error">Error</string>
+    <string name="rs">Rs</string>
+    <string name="zero">0</string>
+    <string name="other">Other\n</string>
 
 
 </resources>

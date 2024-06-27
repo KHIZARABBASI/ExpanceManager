@@ -6,15 +6,274 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.MoreFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/more"
-        android:textSize="@dimen/_25sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <!--    Profile Card-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:background="@drawable/profile_card"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Profile Picture -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/rv_profile"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:backgroundTint="#03000000"
+            app:cardCornerRadius="@dimen/_90sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_profile_pic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- Greeting and Name -->
+        <TextView
+            android:id="@+id/greeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/khula"
+            android:text="@string/greet"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rv_profile" />
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/khula"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/greeting" />
+
+        <!-- Settings Icon -->
+        <TextView
+            android:id="@+id/setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/khula_bold"
+            android:src="@drawable/setting"
+            android:text="@string/backup"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/rv_profile"
+            app:layout_constraintStart_toStartOf="@+id/rv_profile"
+            app:layout_constraintTop_toBottomOf="@id/rv_profile" />
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/khula"
+            android:text="@string/this_month"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/user_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--first row-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/catagory_transction"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_55sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:background="@drawable/button_login"
+        android:backgroundTint="@color/options_clr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        android:elevation="@dimen/_55sdp">
+
+        <ImageView
+            android:id="@+id/iv_trx"
+            style="@style/category_img"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/menu"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transaction"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_trx"
+            app:layout_constraintStart_toEndOf="@+id/iv_trx"
+            app:layout_constraintTop_toTopOf="@+id/iv_trx"
+            style="@style/category_text"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/catagory_scadule_trx"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_55sdp"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:background="@drawable/button_login"
+        android:backgroundTint="@color/options_clr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" >
+
+        <ImageView
+            android:id="@+id/iv_scheduled"
+            style="@style/category_img"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/sechedual"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Scheduled_trx"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_scheduled"
+            app:layout_constraintStart_toEndOf="@+id/iv_scheduled"
+            app:layout_constraintTop_toTopOf="@+id/iv_scheduled"
+            style="@style/category_text"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--    second row-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/catagory_budget"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_55sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:background="@drawable/button_login"
+        android:backgroundTint="@color/options_clr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/catagory_transction"
+        android:elevation="@dimen/_55sdp">
+
+        <ImageView
+            android:id="@+id/iv_budget"
+            style="@style/category_img"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/budget"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/budgets"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_budget"
+            app:layout_constraintStart_toEndOf="@+id/iv_budget"
+            app:layout_constraintTop_toTopOf="@+id/iv_budget"
+            style="@style/category_text"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/catagory_categories"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_55sdp"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:background="@drawable/button_login"
+        android:backgroundTint="@color/options_clr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/catagory_transction" >
+
+        <ImageView
+            android:id="@+id/iv_category"
+            style="@style/category_img"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/category"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/categories"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_category"
+            app:layout_constraintStart_toEndOf="@+id/iv_category"
+            app:layout_constraintTop_toTopOf="@+id/iv_category"
+            style="@style/category_text"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+<!--    third row-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/catagory_tages"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_55sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:background="@drawable/button_login"
+        android:backgroundTint="@color/options_clr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/catagory_budget"
+        android:elevation="@dimen/_55sdp">
+        <ImageView
+            android:id="@+id/iv_tag"
+            style="@style/category_img"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/tag"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tags"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_tag"
+            app:layout_constraintStart_toEndOf="@+id/iv_tag"
+            app:layout_constraintTop_toTopOf="@+id/iv_tag"
+            style="@style/category_text"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/catagory_premum"
+        android:layout_width="@dimen/_130sdp"
+        android:layout_height="@dimen/_55sdp"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:background="@drawable/button_login"
+        android:backgroundTint="@color/options_clr"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/catagory_categories">
+        <ImageView
+            android:id="@+id/iv_premium"
+            style="@style/category_img"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/primimum"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/premium"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_premium"
+            app:layout_constraintStart_toEndOf="@+id/iv_premium"
+            app:layout_constraintTop_toTopOf="@+id/iv_premium"
+            style="@style/category_text"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,20 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.tenx.expancemanager.R
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.tenx.expancemanager.databinding.FragmentMoreBinding
 
 
 class MoreFragment : Fragment() {
-
+    val binding: FragmentMoreBinding by lazy {
+        FragmentMoreBinding.inflate(layoutInflater)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_more, container, false)
+        return binding.root
+
     }
 
 

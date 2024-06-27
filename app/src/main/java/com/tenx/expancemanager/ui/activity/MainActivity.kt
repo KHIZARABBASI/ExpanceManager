@@ -4,6 +4,8 @@ package com.tenx.expancemanager.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.tenx.expancemanager.R
 import com.tenx.expancemanager.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         clickListner()
+        changeStatusBarColor(R.color.btn_gmail_color)
 //        googleAuth()
 //
 
@@ -32,5 +35,8 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
     }
-
+    private fun changeStatusBarColor(colorResId: Int) {
+        val window = window
+        window.statusBarColor = ContextCompat.getColor(this, colorResId)
+    }
 }

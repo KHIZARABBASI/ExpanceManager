@@ -25,6 +25,12 @@
     <color name="balance">#4D4DBABA</color>
     <color name="bn_backcolor">#0769D1</color>
     <color name="transection_background_colr">#994F5699</color>
+    <color name="options_clr">#CCF6F6CC</color>
+
+<!--    tab layout color-->
+    <color name="tab_layout_primary">#CC3E3E3D</color>
+    <color name="tab_layout_secondary">#CC242424</color>
+
 
 
 </resources>
