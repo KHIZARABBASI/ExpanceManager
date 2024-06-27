@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragments.ExpenseFragment">
+
+
+    <!--    Time -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/set_time"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintStart_toStartOf="@id/set_time"
+            app:layout_constraintTop_toTopOf="@id/set_time"
+            app:layout_constraintWidth_percent=".5">
+
+            <ImageView
+                android:id="@+id/iv_calendar"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:src="@drawable/calendar"
+                app:layout_constraintBottom_toBottomOf="@id/cl_date"
+                app:layout_constraintStart_toStartOf="@id/cl_date"
+                app:layout_constraintTop_toTopOf="@id/cl_date"
+                app:tint="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                style="@style/main_font"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:text="@string/date"
+                app:layout_constraintBottom_toBottomOf="@id/iv_calendar"
+                app:layout_constraintStart_toEndOf="@id/iv_calendar"
+                app:layout_constraintTop_toTopOf="@id/iv_calendar" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="@id/set_time"
+            app:layout_constraintTop_toTopOf="@id/set_time"
+            app:layout_constraintWidth_percent=".5">
+
+            <ImageView
+                android:id="@+id/iv_watch"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:src="@drawable/time"
+                app:layout_constraintBottom_toBottomOf="@id/cl_time"
+                app:layout_constraintStart_toStartOf="@id/cl_time"
+                app:layout_constraintTop_toTopOf="@id/cl_time"
+                app:tint="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_time"
+                style="@style/main_font"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:text="@string/time"
+                app:layout_constraintBottom_toBottomOf="@id/iv_watch"
+                app:layout_constraintStart_toEndOf="@id/iv_watch"
+                app:layout_constraintTop_toTopOf="@id/iv_watch" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <!--    Amount-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_amount"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_70sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/set_time">
+
+        <TextView
+            android:id="@+id/textView4"
+            style="@style/main_font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:text="@string/account"
+            app:layout_constraintStart_toEndOf="@+id/tv_currency_code"
+            app:layout_constraintTop_toTopOf="@+id/cl_amount" />
+
+        <TextView
+            android:id="@+id/tv_currency_code"
+            style="@style/amount_code"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <EditText
+            android:id="@+id/et_amount"
+            style="@style/amount_code"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_38sdp"
+            android:autofillHints="0"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical"
+            android:hint="@string/zero"
+            android:inputType="number"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageView3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/textView4"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:contentDescription="@string/txt_error"
+            android:src="@drawable/calculator"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_currency_code"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/_12sdp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+<!--    Category-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_category"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_70sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_amount">
+
+        <TextView
+            android:id="@+id/tv_category"
+            style="@style/main_font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:text="@string/categories"
+            app:layout_constraintStart_toEndOf="@+id/iv_category"
+            app:layout_constraintTop_toTopOf="@+id/cl_category" />
+
+        <ImageView
+            android:id="@+id/iv_category"
+            style="@style/amount_code"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:contentDescription="@string/txt_error"
+            android:text="@string/rs"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_category"
+            android:src="@drawable/more"
+            app:tint="@color/black"/>
+
+        <TextView
+            android:id="@+id/tv_"
+            style="@style/main_font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/other"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/_25sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_category"
+            app:layout_constraintStart_toStartOf="@+id/tv_category"
+            app:layout_constraintTop_toTopOf="@+id/iv_category" />
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:contentDescription="@string/txt_error"
+            android:src="@drawable/calculator"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
