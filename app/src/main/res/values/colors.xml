@@ -31,6 +31,13 @@
     <color name="tab_layout_primary">#CC3E3E3D</color>
     <color name="tab_layout_secondary">#CC242424</color>
 
+<!--    finance activity-->
+
+    <color name="finance_title">#70FFFCFC</color>
+
+<!--    bottomsheet background-->
+    <color name="bottom_sheet_background_color">#B5B5B5</color>
+    <color name="search">#33000000</color>
 
 
 </resources>

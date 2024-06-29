@@ -5,6 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.drawerlayout.widget.DrawerLayout
+import com.mikepenz.materialdrawer.model.DividerDrawerItem
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
+import com.mikepenz.materialdrawer.model.interfaces.nameRes
 import com.tenx.expancemanager.R
 import com.tenx.expancemanager.adopter.RecyclerTransecionAdopter
 import com.tenx.expancemanager.databinding.FragmentHomeBinding
@@ -49,7 +54,29 @@ class HomeFragment : Fragment() {
 
         binding.rvExpanseList.adapter = adopter
 
-        // Inflate the layout for this fragment
+        // Drawer
+        val item1 = PrimaryDrawerItem().apply { nameRes = R.string.btn_phone; identifier = 1 }
+        val item2 = SecondaryDrawerItem().apply { nameRes = R.string.search; identifier = 2 }
+
+        binding.slider.itemAdapter.add(
+            item1,
+            DividerDrawerItem(),
+            item2,
+            SecondaryDrawerItem().apply { nameRes = R.string.more }
+        )
+
+        // specify a click listener
+        binding.slider.onDrawerItemClickListener = { v, drawerItem, position ->
+            // do something with the clicked item :D
+            false
+        }
+
+        binding.setting.setOnClickListener {
+            val drawerLayout = binding.root as DrawerLayout
+            drawerLayout.openDrawer(binding.slider)
+        }
+
+
         return binding.root
 
     }

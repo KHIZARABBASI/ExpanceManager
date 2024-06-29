@@ -9,7 +9,7 @@ import com.tenx.expancemanager.model.CurrencySelectionModel
 
 
 class RecyclerCurrencyAdopter(
-    private val mList: ArrayList<CurrencySelectionModel>
+    private var mList: ArrayList<CurrencySelectionModel>
 ) :
     RecyclerView.Adapter<RecyclerCurrencyAdopter.ItemViewHolder>() {
 
@@ -64,5 +64,14 @@ class RecyclerCurrencyAdopter(
         } else {
             null
         }
+    }
+
+    fun filterList(filterlist: ArrayList<CurrencySelectionModel>) {
+        // below line is to add our filtered
+        // list in our course array list.
+        mList = filterlist
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged()
     }
 }

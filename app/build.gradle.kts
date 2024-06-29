@@ -31,7 +31,7 @@ android {
         }
     }
 
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
     compileOptions {
@@ -63,4 +63,9 @@ dependencies {
     //botom nav
     implementation("com.google.android.material:material:1.3.0-alpha03")
     implementation("com.airbnb.android:lottie:3.4.0")
+
+//    navigationDwwar
+    implementation("com.mikepenz:materialdrawer:9.0.1")
+
+
 }

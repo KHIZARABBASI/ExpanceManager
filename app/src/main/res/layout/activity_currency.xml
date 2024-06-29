@@ -46,8 +46,11 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_currency">
 
         <SearchView
+            android:id="@+id/sv_search_currency"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:iconifiedByDefault="false"
+            android:queryHint="@string/search"
             />
     </RelativeLayout>
 
