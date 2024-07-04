@@ -26,9 +26,6 @@ class TransactionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
-
-
-
         clicklistners()
     }
 

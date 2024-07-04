@@ -22,6 +22,35 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/materialButtonToggleGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageView6"
+                app:singleSelection="true"
+                android:layout_marginEnd="@dimen/_12sdp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/grid_layout_btn"
+                    style="@style/linear_to_grid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/icon_grid_layout"
+                    />
+
+                <Button
+                    android:id="@+id/linear_layout_btn"
+                    style="@style/linear_to_grid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:icon="@drawable/icon_linear_layout"
+                    />
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
@@ -30,7 +59,8 @@
                 android:gravity="center_vertical"
                 android:text="@string/select_category"
                 android:textSize="@dimen/_15sdp"
-                app:layout_constraintStart_toStartOf="@id/top_row" />
+                app:layout_constraintStart_toStartOf="@id/top_row"
+                app:layout_constraintTop_toTopOf="@+id/materialButtonToggleGroup" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout5"
@@ -38,6 +68,9 @@
                 android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView3" />
+
+
+
 
             <ImageView
                 android:id="@+id/close"
@@ -50,14 +83,14 @@
                 android:src="@drawable/close"/>
 
             <ImageView
+                android:id="@+id/imageView6"
                 android:layout_width="@dimen/_20sdp"
                 android:layout_height="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
                 android:src="@drawable/icon_edit"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/close"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginEnd="@dimen/_12sdp"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

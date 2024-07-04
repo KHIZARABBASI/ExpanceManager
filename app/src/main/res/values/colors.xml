@@ -38,6 +38,8 @@
 <!--    bottomsheet background-->
     <color name="bottom_sheet_background_color">#B5B5B5</color>
     <color name="search">#33000000</color>
+    <color name="nav_drawer_bg_color">#1D1B1B</color>
+    <color name="nav_drawer_premium_bg_color">#0FD1D10F</color>
 
 
 </resources>

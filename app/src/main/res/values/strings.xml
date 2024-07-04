@@ -19,7 +19,7 @@ management right at your fingertips.</string>
     <string name="spending">Spending</string>
     <string name="income">Income</string>
     <string name="balance">Balance: </string>
-    <string name="amount">$1012</string>
+    <string name="amount">1012</string>
     <string name="recent_transactions">Recent Transactions</string>
     <string name="see_all">see all</string>
     <string name="no_item_content">Your latest Transactions will appear here.\n
@@ -64,6 +64,12 @@ Track your spending &amp; income.
     <string name="custom">Custom</string>
     <string name="year_month">Year/Month</string>
     <string name="date_range">Date range</string>
+    <string name="currency_symbol">$</string>
+    <string name="special_offer">Special offer for you!</string>
+    <string name="invite_text">25% Savings on Annual Plan! Get it at just Rs.2,000</string>
+    <string name="clam_my_offer">clam my offer</string>
+    <string name="theme">Theme</string>
+    <string name="device_theme">Device Theme</string>
 
 
 </resources>

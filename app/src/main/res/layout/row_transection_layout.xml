@@ -28,7 +28,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/tv_amount"
+        android:id="@+id/tv_expense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/khula_bold"
@@ -51,7 +51,7 @@
         android:textSize="@dimen/_13sdp"
         app:layout_constraintBottom_toBottomOf="@+id/cl_card"
         app:layout_constraintStart_toEndOf="@+id/cl_card"
-        app:layout_constraintTop_toBottomOf="@+id/tv_amount" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_expense" />
 
     <TextView
         android:id="@+id/tv_date"

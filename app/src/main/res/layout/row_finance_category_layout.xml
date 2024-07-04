@@ -43,7 +43,7 @@
             android:layout_marginStart="@dimen/_12sdp"
             app:layout_constraintStart_toEndOf="@+id/constraintLayout6"
             app:layout_constraintTop_toTopOf="parent"
-            style="@style/main_font"
+            style="@style/primery_text_white"
             android:textColor="@color/white"/>
 
 

@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
+    id("kotlin-kapt")
 }
 
 android {
@@ -51,6 +52,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.firebase.auth)
+    implementation(libs.firebase.crashlytics.buildtools)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -64,8 +66,17 @@ dependencies {
     implementation("com.google.android.material:material:1.3.0-alpha03")
     implementation("com.airbnb.android:lottie:3.4.0")
 
-//    navigationDwwar
-    implementation("com.mikepenz:materialdrawer:9.0.1")
+    //roomdatabse
+    implementation("androidx.room:room-runtime:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    implementation("androidx.room:room-rxjava2:2.6.1")
+    implementation("androidx.room:room-rxjava3:2.6.1")
+    implementation("androidx.room:room-guava:2.6.1")
+    testImplementation("androidx.room:room-testing:2.6.1")
+    implementation("androidx.room:room-paging:2.6.1")
+    implementation ("com.google.code.gson:gson:2.11.0")
+
 
 
 }

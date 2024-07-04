@@ -9,10 +9,6 @@ import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.mikepenz.materialdrawer.model.DividerDrawerItem
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem
-import com.mikepenz.materialdrawer.model.SecondaryDrawerItem
-import com.mikepenz.materialdrawer.model.interfaces.nameRes
 import com.tenx.expancemanager.R
 import com.tenx.expancemanager.databinding.ActivityDashboardBinding
 import com.tenx.expancemanager.ui.fragments.AccountFragment
@@ -32,21 +28,9 @@ class DashboardActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        val item1 = PrimaryDrawerItem().apply { nameRes = R.string.btn_phone; identifier = 1 }
-        val item2 = SecondaryDrawerItem().apply { nameRes = R.string.search; identifier = 2 }
-
-        binding.slider.itemAdapter.add(
-            item1,
-            DividerDrawerItem(),
-            item2,
-            SecondaryDrawerItem().apply { nameRes = R.string.more }
-        )
 
         // specify a click listener
-        binding.slider.onDrawerItemClickListener = { v, drawerItem, position ->
-            // do something with the clicked item :D
-            false
-        }
+
 
 
         clickListner()
