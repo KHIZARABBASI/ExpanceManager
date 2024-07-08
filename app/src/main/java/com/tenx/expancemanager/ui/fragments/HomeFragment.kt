@@ -169,36 +169,6 @@ class HomeFragment : Fragment() {
         // Implement this method
     }
 
-//    private suspend fun initVar() {
-//        withContext(Dispatchers.IO) {
-//            db = AppDatabase.getDatabase(requireContext())
-////            mList = db.expenseDao().getAll() as ArrayList<ExpenseEntity>
-//            val expenses = db.expenseDao().getAll() as ArrayList<ExpenseEntity>
-//            val incomes = db.incomeDao().getAll() as ArrayList<IncomeEntity>
-//
-//            mList = ArrayList<Any>().apply {
-//                addAll(expenses)
-//                addAll(incomes)
-//            }
-//            // Merge expenses and incomes into a single list of Any
-//            mList = ArrayList<Any>().apply {
-//                addAll(expenses)
-//                addAll(incomes)
-//            }
-//
-//            // Define a date formatter
-//            val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
-//
-//            // Sort the merged list by date
-//            mList.sortBy {
-//                when (it) {
-//                    is ExpenseEntity -> LocalDate.parse(it.date, formatter)
-//                    is IncomeEntity -> LocalDate.parse(it.date, formatter)
-//                    else -> throw IllegalArgumentException("Unknown type")
-//                }
-//            }
-//        }
-//
 ////        adopter.updateList(mList)
 ////        adopter.notifyDataSetChanged()
 //
