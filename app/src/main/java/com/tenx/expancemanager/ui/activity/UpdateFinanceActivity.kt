@@ -1,5 +1,6 @@
 package com.tenx.expancemanager.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -46,6 +47,9 @@ class UpdateFinanceActivity : AppCompatActivity() {
             }
 
         })
+        binding.back.setOnClickListener {
+            startActivity(Intent(this, DashboardActivity::class.java))
+        }
 
         binding.viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {

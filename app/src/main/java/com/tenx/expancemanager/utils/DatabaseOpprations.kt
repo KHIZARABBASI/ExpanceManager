@@ -12,7 +12,7 @@ class DatabaseOpprations(context: Context) {
     suspend fun getAll(){
         dao.expenseDao().getAll()
     }
-    suspend fun totalExpense(): String{
+    suspend fun totalExpense(): Int{
        val v= dao.expenseDao().totalExpense()
         return v
     }

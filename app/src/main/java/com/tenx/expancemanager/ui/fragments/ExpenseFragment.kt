@@ -15,7 +15,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tenx.expancemanager.R
-import com.tenx.expancemanager.adapter.RecyclerBottomSheetCategoryAdopter
+import com.tenx.expancemanager.adopter.RecyclerExpanseCategoryAdopter
 import com.tenx.expancemanager.database.appDatabase.AppDatabase
 import com.tenx.expancemanager.database.dao.ExpenseDao
 import com.tenx.expancemanager.database.entity.ExpenseEntity
@@ -33,39 +33,24 @@ class ExpenseFragment : Fragment() {
     private val binding: FragmentExpenseBinding by lazy {
         FragmentExpenseBinding.inflate(layoutInflater)
     }
+    private lateinit var cal : Calendar
     private lateinit var db: AppDatabase
     private lateinit var expenseDao: ExpenseDao
     private lateinit var callback: OnBackPressedCallback
+    private lateinit var dateSetListener: DatePickerDialog. OnDateSetListener
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        db = AppDatabase.getDatabase(requireContext())
-        expenseDao = db.expenseDao()
-        callback = object : OnBackPressedCallback(true /* enabled by default */) {
-            override fun handleOnBackPressed() {
-                requireContext().startActivity(Intent(requireContext(),DashboardActivity::class.java))
-            }
-        }
 
-        // Add callback to the back press dispatcher
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+        initVar()
+        onClickListener()
 
-        val cal = Calendar.getInstance()
-        binding.tvDate.text = SimpleDateFormat("dd.MM.yyyy", Locale.US).format(System.currentTimeMillis())
-        binding.tvTime.text = SimpleDateFormat("h:mm a", Locale.US).format(System.currentTimeMillis())
+        return binding.root
+    }
 
-        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-            cal.set(Calendar.YEAR, year)
-            cal.set(Calendar.MONTH, monthOfYear)
-            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
-            val myFormat = "dd.MM.yyyy" // mention the format you need
-            val sdf = SimpleDateFormat(myFormat, Locale.US)
-            binding.tvDate.text = sdf.format(cal.time)
-        }
-
+    private fun onClickListener() {
         binding.tvDate.setOnClickListener {
             DatePickerDialog(requireContext(), dateSetListener,
                 cal.get(Calendar.YEAR),
@@ -86,7 +71,7 @@ class ExpenseFragment : Fragment() {
 
         binding.clCategory.setOnClickListener {
             val dialog = BottomSheetDialog(requireContext())
-            val adapter: RecyclerBottomSheetCategoryAdopter
+            val adapter: RecyclerExpanseCategoryAdopter
             val bindingBottomSheet: LayoutBottomSheetCategoryBinding by lazy {
                 LayoutBottomSheetCategoryBinding.inflate(layoutInflater)
             }
@@ -102,10 +87,10 @@ class ExpenseFragment : Fragment() {
             mList.add(BottomSheetCategoryModel(R.drawable.more, "More"))
             mList.add(BottomSheetCategoryModel(R.drawable.icon_food, "Food & Dining"))
             mList.add(BottomSheetCategoryModel(R.drawable.icon_shop, "Shopping"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_travel, "More"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_entertainment, "More"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_health, "More"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_personal_care, "More"))
+            mList.add(BottomSheetCategoryModel(R.drawable.icon_travel, "Travel"))
+            mList.add(BottomSheetCategoryModel(R.drawable.icon_entertainment, "Entertainment"))
+            mList.add(BottomSheetCategoryModel(R.drawable.icon_health, "Health"))
+            mList.add(BottomSheetCategoryModel(R.drawable.icon_personal_care, "Personal Care"))
             mList.add(BottomSheetCategoryModel(R.drawable.icon_education, "Education"))
             mList.add(BottomSheetCategoryModel(R.drawable.icon_bill, "Bill and Utilities"))
             mList.add(BottomSheetCategoryModel(R.drawable.icon_investment, "Investment"))
@@ -113,9 +98,8 @@ class ExpenseFragment : Fragment() {
             mList.add(BottomSheetCategoryModel(R.drawable.icon_tex, "Taxes"))
             mList.add(BottomSheetCategoryModel(R.drawable.icon_insurance, "Insurance"))
             mList.add(BottomSheetCategoryModel(R.drawable.icon_gift, "Gifts & Donation"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_gift, "Gifts & Donation"))
 
-            adapter = RecyclerBottomSheetCategoryAdopter(mList)
+            adapter = RecyclerExpanseCategoryAdopter(mList)
             bindingBottomSheet.rvCategory.adapter = adapter
 
             dialog.show()
@@ -126,7 +110,7 @@ class ExpenseFragment : Fragment() {
             val date = binding.tvDate.text.toString()
             val time = binding.tvTime.text.toString()
             val category = binding.tvOther.text.toString()
-            val payment = binding.tvPayment.text.toString()
+            val payment = binding.tvCash.text.toString()
             val notes = binding.etNote.text.toString()
             val tag = "Test"
             val img = R.drawable.icon_bank
@@ -138,8 +122,35 @@ class ExpenseFragment : Fragment() {
                 Toast.makeText(requireContext(), "Please enter a valid amount", Toast.LENGTH_SHORT).show()
             }
         }
+    }
 
-        return binding.root
+    private fun initVar() {
+        db = AppDatabase.getDatabase(requireContext())
+        expenseDao = db.expenseDao()
+
+        callback = object : OnBackPressedCallback(true /* enabled by default */) {
+            override fun handleOnBackPressed() {
+                requireContext().startActivity(Intent(requireContext(),DashboardActivity::class.java))
+            }
+        }
+
+
+        // Add callback to the back press dispatcher
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
+        cal = Calendar.getInstance()
+        binding.tvDate.text = SimpleDateFormat("dd.MM.yyyy", Locale.US).format(System.currentTimeMillis())
+        binding.tvTime.text = SimpleDateFormat("h:mm a", Locale.US).format(System.currentTimeMillis())
+
+        dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, monthOfYear)
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+            val myFormat = "dd.MM.yyyy" // mention the format you need
+            val sdf = SimpleDateFormat(myFormat, Locale.US)
+            binding.tvDate.text = sdf.format(cal.time)
+        }
     }
 
     private fun saveUser(amount: Int, date: String, time: String, category: String, payment: String, note: String, tag: String, img: Int, imgCategory: Int) {

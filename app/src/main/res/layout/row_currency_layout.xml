@@ -19,7 +19,7 @@
             android:id="@+id/flag_img"
             android:layout_width="@dimen/_34sdp"
             android:layout_height="@dimen/_34sdp"
-            android:src="@drawable/button" />
+            android:src="@drawable/style_button_secondary" />
 
         <RelativeLayout
             android:layout_width="match_parent"

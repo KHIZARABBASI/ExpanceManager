@@ -1,11 +1,13 @@
 package com.tenx.expancemanager.ui.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity.MODE_PRIVATE
 import androidx.lifecycle.lifecycleScope
@@ -15,7 +17,9 @@ import com.tenx.expancemanager.adopter.RecyclerSettingdrawerAdopter
 import com.tenx.expancemanager.adopter.RecyclerTransecionAdopter
 import com.tenx.expancemanager.database.appDatabase.AppDatabase
 import com.tenx.expancemanager.database.dao.ExpenseDao
+import com.tenx.expancemanager.database.dao.IncomeDao
 import com.tenx.expancemanager.database.entity.ExpenseEntity
+import com.tenx.expancemanager.database.entity.IncomeEntity
 import com.tenx.expancemanager.databinding.FragmentHomeBinding
 import com.tenx.expancemanager.databinding.LayoutNavDrawarHeaderBinding
 import com.tenx.expancemanager.databinding.LayoutNavDrawerBodyBinding
@@ -27,13 +31,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Calendar
 
 class HomeFragment : Fragment() {
 
 
-    private lateinit var mList: ArrayList<ExpenseEntity>
+    private lateinit var mList: ArrayList<Any>
     private lateinit var adopter: RecyclerTransecionAdopter
     private lateinit var expenseDao: ExpenseDao
+    private lateinit var incomeDao: IncomeDao
     private lateinit var db: AppDatabase
 
     private val binding: FragmentHomeBinding by lazy {
@@ -44,7 +51,6 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
 
-
         return binding.root
     }
 
@@ -52,6 +58,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         db = AppDatabase.getDatabase(requireContext())
         expenseDao = db.expenseDao()
+        incomeDao = db.incomeDao()
         adopter = RecyclerTransecionAdopter(arrayListOf())
         binding.rvExpanseList.adapter = adopter // Set adapter initially
 
@@ -67,18 +74,53 @@ class HomeFragment : Fragment() {
         selectCurrency()
         clickListner()
         navDrawer()
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             setValues()
         }
+
+        greeting()
     }
+
+    private fun greeting() {
+        val cal = Calendar.getInstance()
+        val hour = cal.get(Calendar.HOUR_OF_DAY)
+
+        val greeting = when (hour) {
+            in 0..11 -> "Good Morning"
+            in 12..16 -> "Good Noon"
+            in 17..23 -> "Good Evening"
+            else -> "Hello"
+        }
+            binding.greeting.text = greeting.toString()
+
+
+
+    }
+
     private suspend fun setValues() {
+        val totalExpense: Int = expenseDao.totalExpense()
+        val totalIncome: Int = incomeDao.totalIncome()
+        val totalAmount = totalIncome+totalExpense
+
+
+
         try {
-            val totalExpense = expenseDao.totalExpense() // Assuming totalExpense() is updated to handle null values
+             // Assuming totalExpense() is updated to handle null values
             binding.tvExpense.text = totalExpense.toString()
         } catch (e: Exception) {
             Log.e("Error", "Error getting total expense: ${e.message}")
-            binding.tvExpense.text = "Error"
+            binding.tvExpense.text = "0"
         }
+
+        try {
+
+            binding.tvAmountIncome.text = totalIncome.toString()
+        }  catch (e: Exception){
+            Log.e("Error", "Error getting total expense: ${e.message}")
+            binding.tvIncome.text = "0"
+        }
+
+        binding.tvAmountBalance.text= totalAmount.toString()
     }
 
 
@@ -127,17 +169,79 @@ class HomeFragment : Fragment() {
         // Implement this method
     }
 
+//    private suspend fun initVar() {
+//        withContext(Dispatchers.IO) {
+//            db = AppDatabase.getDatabase(requireContext())
+////            mList = db.expenseDao().getAll() as ArrayList<ExpenseEntity>
+//            val expenses = db.expenseDao().getAll() as ArrayList<ExpenseEntity>
+//            val incomes = db.incomeDao().getAll() as ArrayList<IncomeEntity>
+//
+//            mList = ArrayList<Any>().apply {
+//                addAll(expenses)
+//                addAll(incomes)
+//            }
+//            // Merge expenses and incomes into a single list of Any
+//            mList = ArrayList<Any>().apply {
+//                addAll(expenses)
+//                addAll(incomes)
+//            }
+//
+//            // Define a date formatter
+//            val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+//
+//            // Sort the merged list by date
+//            mList.sortBy {
+//                when (it) {
+//                    is ExpenseEntity -> LocalDate.parse(it.date, formatter)
+//                    is IncomeEntity -> LocalDate.parse(it.date, formatter)
+//                    else -> throw IllegalArgumentException("Unknown type")
+//                }
+//            }
+//        }
+//
+////        adopter.updateList(mList)
+////        adopter.notifyDataSetChanged()
+//
+//        // Update the RecyclerView adapter on the main thread
+//        withContext(Dispatchers.Main) {
+//            adopter.updateList(mList)
+//        }
+//        adopter.notifyDataSetChanged()
+//
+//
+//    }
+
+
     private suspend fun initVar() {
         withContext(Dispatchers.IO) {
-            db = AppDatabase.getDatabase(requireContext())
-            mList = db.expenseDao().getAll() as ArrayList<ExpenseEntity>
+            val expenses = expenseDao.getAll() as List<ExpenseEntity>
+            val incomes = incomeDao.getAll() as List<IncomeEntity>
+
+            // Merge expenses and incomes into a single list of Any
+            mList = ArrayList<Any>().apply {
+                addAll(expenses)
+                addAll(incomes)
+            }
+
+            // Define a date formatter
+            val formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+
+            // Sort the merged list by date
+            mList.sortBy {
+                when (it) {
+                    is ExpenseEntity -> LocalDate.parse(it.date, formatter)
+                    is IncomeEntity -> LocalDate.parse(it.date, formatter)
+                    else -> throw IllegalArgumentException("Unknown type")
+                }
+            }
         }
 
-        adopter.updateList(mList)
-        adopter.notifyDataSetChanged()
-
-
+        // Update the RecyclerView adapter on the main thread
+        withContext(Dispatchers.Main) {
+            adopter.updateList(mList)
+        }
     }
+
 
     private fun selectCurrency() {
         // Retrieve the currency symbol from SharedPreferences

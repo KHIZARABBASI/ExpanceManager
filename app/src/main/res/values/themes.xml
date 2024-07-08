@@ -3,6 +3,12 @@
     <style name="Base.Theme.ExpanceManager" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
 <!--         <item name="colorPrimary">@color/btn_gmail_color</item>-->
+
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
 
     <style name="Theme.ExpanceManager" parent="Base.Theme.ExpanceManager" />
@@ -13,6 +19,13 @@
         <item name="android:textSize">@dimen/_12sdp</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textColor">@color/black</item>
+
+    </style>
+
+    <!--        style="@style/mini_text"-->
+    <style name="mini_text">
+        <item name="android:textSize">@dimen/_9sdp</item>
+        <item name="android:fontFamily">@font/khula</item>
 
     </style>
 

@@ -1,4 +1,4 @@
-package com.tenx.expancemanager.adapter
+package com.tenx.expancemanager.adopter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tenx.expancemanager.databinding.RowFinanceCategoryLayoutBinding
 import com.tenx.expancemanager.model.BottomSheetCategoryModel
 
-class RecyclerBottomSheetCategoryAdopter(
+class RecyclerExpanseCategoryAdopter(
     private val mList: ArrayList<BottomSheetCategoryModel>
-) : RecyclerView.Adapter<RecyclerBottomSheetCategoryAdopter.ViewHolder>() {
+) : RecyclerView.Adapter<RecyclerExpanseCategoryAdopter.ViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

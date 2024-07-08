@@ -53,6 +53,7 @@ Track your spending &amp; income.
     <string name="add_tags">Add Tages</string>
     <string name="add_attach">Add Attach</string>
     <string name="select_category">Select Category</string>
+    <string name="payment_category">Select Payment Mode</string>
     <string name="search">Search here</string>
     <string name="date_created">Date Created</string>
     <string name="amount_menu">Amount</string>
@@ -70,6 +71,9 @@ Track your spending &amp; income.
     <string name="clam_my_offer">clam my offer</string>
     <string name="theme">Theme</string>
     <string name="device_theme">Device Theme</string>
+    <string name="bank_account">Bank Account</string>
+    <string name="show_balance">Show Balance</string>
+    <string name="encript">*******</string>
 
 
 </resources>

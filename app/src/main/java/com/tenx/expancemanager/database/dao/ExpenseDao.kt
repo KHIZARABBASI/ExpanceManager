@@ -14,5 +14,8 @@ interface ExpenseDao {
     suspend fun getAll(): List<ExpenseEntity>
 
     @Query("SELECT SUM(amount) FROM expense")
-    suspend fun totalExpense(): String
+    suspend fun totalExpense(): Int
+
+    @Query("SELECT SUM(amount) FROM expense WHERE payment = 'Cash'")
+    suspend fun getAmounCash(): String
 }

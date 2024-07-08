@@ -29,7 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_money"
         android:orientation="horizontal"
-        android:background="@drawable/button_login"
+        android:background="@drawable/style_button_primary"
         android:backgroundTint="@color/btn_gmail_color"
         android:gravity="center">
         <ImageView
@@ -53,7 +53,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_login_gmail"
         android:orientation="horizontal"
-        android:background="@drawable/button_login"
+        android:background="@drawable/style_button_primary"
         android:backgroundTint="@color/btn_phone_color"
         android:gravity="center">
         <ImageView
@@ -77,7 +77,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_login_phone"
         android:orientation="horizontal"
-        android:background="@drawable/button_login"
+        android:background="@drawable/style_button_primary"
         android:backgroundTint="@color/btn_premitive_color"
         android:gravity="center">
         <ImageView
@@ -101,7 +101,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_login_google"
         android:orientation="horizontal"
-        android:background="@drawable/button_login"
+        android:background="@drawable/style_button_primary"
         android:backgroundTint="@color/btn_premitive_color"
         android:gravity="center">
         <ImageView

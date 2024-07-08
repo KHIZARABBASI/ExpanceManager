@@ -97,25 +97,25 @@
 
 <!--        search-->
 
-        <SearchView
-            android:id="@+id/searchView"
-            android:layout_width="@dimen/_180sdp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_row"
-            android:background="@drawable/search_design"/>
+<!--        <SearchView-->
+<!--            android:id="@+id/searchView"-->
+<!--            android:layout_width="@dimen/_180sdp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/top_row"-->
+<!--            android:background="@drawable/search_design"/>-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_15sdp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchView"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/row_finance_category_layout"/>
+            app:layout_constraintTop_toBottomOf="@+id/top_row"
+            tools:listitem="@layout/row_finance_category_layout" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

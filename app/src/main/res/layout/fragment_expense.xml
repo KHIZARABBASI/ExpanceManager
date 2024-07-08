@@ -251,7 +251,7 @@
                     app:tint="@color/white" />
 
                 <TextView
-                    android:id="@+id/tv_"
+                    android:id="@+id/tv_cash"
                     style="@style/primery_text_white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

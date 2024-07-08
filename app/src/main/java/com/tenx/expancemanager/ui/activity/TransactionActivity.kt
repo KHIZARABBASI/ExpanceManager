@@ -5,17 +5,13 @@ import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tenx.expancemanager.R
-import com.tenx.expancemanager.adapter.RecyclerBottomSheetCategoryAdopter
 import com.tenx.expancemanager.adopter.RecyclerCustomizeCategoryAdopter
 import com.tenx.expancemanager.databinding.ActivityTransactionBinding
-import com.tenx.expancemanager.databinding.LayoutBottomSheetCategoryBinding
 import com.tenx.expancemanager.databinding.LayoutBottomsheetCustomizeBinding
 import com.tenx.expancemanager.model.BottomSheetCategoryModel
-import com.tenx.expancemanager.ui.fragments.ExpenseFragment
 
 class TransactionActivity : AppCompatActivity() {
     private val binding: ActivityTransactionBinding by lazy {

@@ -8,15 +8,18 @@ import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.tenx.expancemanager.database.dao.ExpenseDao
+import com.tenx.expancemanager.database.dao.IncomeDao
 import com.tenx.expancemanager.database.entity.ExpenseEntity
 import com.tenx.expancemanager.database.entity.IncomeEntity
 import com.tenx.expancemanager.model.TagConverter
 
-@Database(entities = [ExpenseEntity::class, IncomeEntity::class], version = 3)
+@Database(entities = [ExpenseEntity::class, IncomeEntity::class], version = 4)
 @TypeConverters(TagConverter::class)
 
 abstract class AppDatabase : RoomDatabase() {
     abstract fun expenseDao(): ExpenseDao
+    abstract fun incomeDao(): IncomeDao
+
 
     companion object {
         @Volatile
