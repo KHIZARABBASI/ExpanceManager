@@ -3,11 +3,12 @@ package com.tenx.expancemanager.adopter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.tenx.expancemanager.database.entity.ExpenseCategoryEntity
 import com.tenx.expancemanager.databinding.RowSelectCategoryBinding
 import com.tenx.expancemanager.model.BottomSheetCategoryModel
 
 class RecyclerCustomizeCategoryAdopter(
-    private val mList: ArrayList<BottomSheetCategoryModel>
+    private val mList: ArrayList<ExpenseCategoryEntity>
 ): RecyclerView.Adapter<RecyclerCustomizeCategoryAdopter.ViewHolder>() {
 
     override fun onCreateViewHolder(

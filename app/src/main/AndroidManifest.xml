@@ -13,6 +13,9 @@
         android:theme="@style/Theme.ExpanceManager"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.CategoryActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.TransactionActivity"
             android:exported="false" />
         <activity
@@ -29,18 +32,14 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.activity.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 

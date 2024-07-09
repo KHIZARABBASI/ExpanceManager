@@ -3,11 +3,12 @@ package com.tenx.expancemanager.adopter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.tenx.expancemanager.database.entity.ExpenseCategoryEntity
+import com.tenx.expancemanager.databinding.RowCircularCategogryLayoutBinding
 import com.tenx.expancemanager.databinding.RowFinanceCategoryLayoutBinding
-import com.tenx.expancemanager.model.BottomSheetCategoryModel
 
 class RecyclerExpanseCategoryAdopter(
-    private val mList: ArrayList<BottomSheetCategoryModel>
+    private val mList: ArrayList<ExpenseCategoryEntity>
 ) : RecyclerView.Adapter<RecyclerExpanseCategoryAdopter.ViewHolder>() {
 
     override fun onCreateViewHolder(
@@ -35,9 +36,12 @@ class RecyclerExpanseCategoryAdopter(
     inner class ViewHolder(private val binding: RowFinanceCategoryLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: BottomSheetCategoryModel) {
-            binding.ivCategory.setImageResource(item.img)
+        fun bind(item: ExpenseCategoryEntity) {
+            binding.ivCategory.setImageResource(item.categoryImg)
             binding.tvCatagory.text= item.name
         }
     }
+
+
+
 }

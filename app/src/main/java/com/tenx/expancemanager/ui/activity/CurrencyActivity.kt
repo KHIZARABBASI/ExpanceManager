@@ -1,7 +1,6 @@
 package com.tenx.expancemanager.ui.activity
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.SearchView
 import android.widget.Toast
@@ -26,29 +25,24 @@ class CurrencyActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
+        userLogin()
+
         binding.conform.setOnClickListener {
             val selectedItem = adopter.getSelectedItem()
 
             if (selectedItem != null) {
-                val data = selectedItem
-                selectedCurrency = data.currencySymbol
+                selectedCurrency = selectedItem.currencySymbol
 
                 Toast.makeText(this, "code $selectedCurrency", Toast.LENGTH_SHORT).show()
                 val sharedPreference = getSharedPreferences("currency_symbol", MODE_PRIVATE)
                 val editor = sharedPreference.edit()
-                editor.putString("symbol",selectedCurrency)
+                editor.putString("symbol", selectedCurrency)
                 editor.apply()
-
-
-                // Handle the selected item
-                // For example, start a new activity or update the UI
-                // You can access the selected item's properties like selectedItem.currencyCode, selectedItem.countryName, etc.
+                startActivity(Intent(this@CurrencyActivity, DashboardActivity::class.java))
             } else {
-                // Handle the case where no item is selected
-                // For example, show a Toast message
-                Toast.makeText(this, "No item selected", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "select any one! ", Toast.LENGTH_SHORT).show()
             }
-            startActivity(Intent(this@CurrencyActivity, DashboardActivity::class.java))
+
         }
 
         mList = ArrayList()
@@ -89,6 +83,13 @@ class CurrencyActivity : AppCompatActivity() {
         })
     }
 
+    private fun userLogin() {
+        val user = getSharedPreferences("user_login", MODE_PRIVATE)
+        val editor = user.edit()
+        editor.putBoolean("is_first_time", true)
+        editor.apply()
+    }
+
     private fun filter(text: String) {
         // creating a new array list to filter our data.
         val filteredlist: ArrayList<CurrencySelectionModel> = ArrayList()
@@ -103,12 +104,8 @@ class CurrencyActivity : AppCompatActivity() {
             }
         }
         if (filteredlist.isEmpty()) {
-            // if no item is added in filtered list we are
-            // displaying a toast message as no data found.
             Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show()
         } else {
-            // at last we are passing that filtered
-            // list to our adapter class
             adopter.filterList(filteredlist)
         }
     }

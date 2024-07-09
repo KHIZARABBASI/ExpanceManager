@@ -17,8 +17,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tenx.expancemanager.R
 import com.tenx.expancemanager.adopter.RecyclerExpanseCategoryAdopter
 import com.tenx.expancemanager.database.appDatabase.AppDatabase
+import com.tenx.expancemanager.database.dao.ExpenseCategoryDao
 import com.tenx.expancemanager.database.dao.ExpenseDao
+import com.tenx.expancemanager.database.dao.IncomeCategoryDao
+import com.tenx.expancemanager.database.dao.TransctionDao
+import com.tenx.expancemanager.database.entity.ExpenseCategoryEntity
 import com.tenx.expancemanager.database.entity.ExpenseEntity
+import com.tenx.expancemanager.database.entity.TransctionEntity
 import com.tenx.expancemanager.databinding.FragmentExpenseBinding
 import com.tenx.expancemanager.databinding.LayoutBottomSheetCategoryBinding
 import com.tenx.expancemanager.model.BottomSheetCategoryModel
@@ -33,11 +38,13 @@ class ExpenseFragment : Fragment() {
     private val binding: FragmentExpenseBinding by lazy {
         FragmentExpenseBinding.inflate(layoutInflater)
     }
-    private lateinit var cal : Calendar
+    private lateinit var cal: Calendar
     private lateinit var db: AppDatabase
+    private lateinit var expenseCategoryDao: ExpenseCategoryDao
     private lateinit var expenseDao: ExpenseDao
+    private lateinit var tarnsectionDao : TransctionDao
     private lateinit var callback: OnBackPressedCallback
-    private lateinit var dateSetListener: DatePickerDialog. OnDateSetListener
+    private lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,10 +59,12 @@ class ExpenseFragment : Fragment() {
 
     private fun onClickListener() {
         binding.tvDate.setOnClickListener {
-            DatePickerDialog(requireContext(), dateSetListener,
+            DatePickerDialog(
+                requireContext(), dateSetListener,
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
-                cal.get(Calendar.DAY_OF_MONTH)).show()
+                cal.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
 
         binding.clPayment.setOnClickListener {}
@@ -66,44 +75,20 @@ class ExpenseFragment : Fragment() {
                 cal.set(Calendar.MINUTE, minute)
                 binding.tvTime.text = SimpleDateFormat("h:mm a", Locale.US).format(cal.time)
             }
-            TimePickerDialog(requireContext(), timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+            TimePickerDialog(
+                requireContext(),
+                timeSetListener,
+                cal.get(Calendar.HOUR_OF_DAY),
+                cal.get(Calendar.MINUTE),
+                true
+            ).show()
         }
 
         binding.clCategory.setOnClickListener {
-            val dialog = BottomSheetDialog(requireContext())
-            val adapter: RecyclerExpanseCategoryAdopter
-            val bindingBottomSheet: LayoutBottomSheetCategoryBinding by lazy {
-                LayoutBottomSheetCategoryBinding.inflate(layoutInflater)
-            }
 
-            dialog.setContentView(bindingBottomSheet.root)
-
-            bindingBottomSheet.close.setOnClickListener {
-                dialog.dismiss()
-            }
-
-            val mList: ArrayList<BottomSheetCategoryModel> = ArrayList()
-
-            mList.add(BottomSheetCategoryModel(R.drawable.more, "More"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_food, "Food & Dining"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_shop, "Shopping"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_travel, "Travel"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_entertainment, "Entertainment"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_health, "Health"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_personal_care, "Personal Care"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_education, "Education"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_bill, "Bill and Utilities"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_investment, "Investment"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_rent, "Rent"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_tex, "Taxes"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_insurance, "Insurance"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_gift, "Gifts & Donation"))
-
-            adapter = RecyclerExpanseCategoryAdopter(mList)
-            bindingBottomSheet.rvCategory.adapter = adapter
-
-            dialog.show()
+            showCategoryDialog()
         }
+
 
         binding.saveExpense.setOnClickListener {
             val amount = binding.etAmount.text.toString().toIntOrNull() ?: 0
@@ -119,7 +104,8 @@ class ExpenseFragment : Fragment() {
             if (amount > 0) {
                 saveUser(amount, date, time, category, payment, notes, tag, img, imgCategory)
             } else {
-                Toast.makeText(requireContext(), "Please enter a valid amount", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please enter a valid amount", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
@@ -127,10 +113,18 @@ class ExpenseFragment : Fragment() {
     private fun initVar() {
         db = AppDatabase.getDatabase(requireContext())
         expenseDao = db.expenseDao()
+        tarnsectionDao = db.transectionDao()
+        expenseCategoryDao = db.expenseCategoryDao()
+
 
         callback = object : OnBackPressedCallback(true /* enabled by default */) {
             override fun handleOnBackPressed() {
-                requireContext().startActivity(Intent(requireContext(),DashboardActivity::class.java))
+                requireContext().startActivity(
+                    Intent(
+                        requireContext(),
+                        DashboardActivity::class.java
+                    )
+                )
             }
         }
 
@@ -139,8 +133,10 @@ class ExpenseFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
         cal = Calendar.getInstance()
-        binding.tvDate.text = SimpleDateFormat("dd.MM.yyyy", Locale.US).format(System.currentTimeMillis())
-        binding.tvTime.text = SimpleDateFormat("h:mm a", Locale.US).format(System.currentTimeMillis())
+        binding.tvDate.text =
+            SimpleDateFormat("dd.MM.yyyy", Locale.US).format(System.currentTimeMillis())
+        binding.tvTime.text =
+            SimpleDateFormat("h:mm a", Locale.US).format(System.currentTimeMillis())
 
         dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             cal.set(Calendar.YEAR, year)
@@ -153,20 +149,55 @@ class ExpenseFragment : Fragment() {
         }
     }
 
-    private fun saveUser(amount: Int, date: String, time: String, category: String, payment: String, note: String, tag: String, img: Int, imgCategory: Int) {
-        val user = ExpenseEntity(0, amount, date, time, category, payment, note, tag, img, imgCategory)
-
+    private fun saveUser(
+        amount: Int,
+        date: String,
+        time: String,
+        category: String,
+        payment: String,
+        note: String,
+        tag: String,
+        img: Int,
+        imgCategory: Int
+    ) {
+        val user =
+            ExpenseEntity(0, amount, date, time, category, payment, note, tag, img, imgCategory)
+        val user1 = TransctionEntity(0, amount, date, time, category, payment, note, tag, img, imgCategory)
         lifecycleScope.launch(Dispatchers.IO) {
             try {
+                tarnsectionDao.insert(user1)
                 expenseDao.insert(user)
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), "Saved Successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Saved Successfully", Toast.LENGTH_SHORT)
+                        .show()
                 }
             } catch (e: Exception) {
                 Log.e("saveUserError", "Error saving user: ${e.message}")
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), "Failed to save user", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Failed to save user", Toast.LENGTH_SHORT)
+                        .show()
                 }
+            }
+        }
+    }
+
+    private fun showCategoryDialog() {
+        val dialog = BottomSheetDialog(requireContext())
+        val bindingBottomSheet = LayoutBottomSheetCategoryBinding.inflate(layoutInflater)
+        dialog.setContentView(bindingBottomSheet.root)
+
+        bindingBottomSheet.close.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        lifecycleScope.launch {
+            try {
+                val mList = expenseCategoryDao.getAll() as ArrayList<ExpenseCategoryEntity>
+                val adapter = RecyclerExpanseCategoryAdopter(mList)
+                bindingBottomSheet.rvCategory.adapter = adapter
+                dialog.show()
+            } catch (e: Exception) {
+                Log.e("ExpenseFragment", "Error fetching categories: ${e.message}")
             }
         }
     }

@@ -2,70 +2,73 @@ package com.tenx.expancemanager.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tenx.expancemanager.R
 import com.tenx.expancemanager.adopter.RecyclerCustomizeCategoryAdopter
+import com.tenx.expancemanager.database.appDatabase.AppDatabase
+import com.tenx.expancemanager.database.dao.ExpenseCategoryDao
+import com.tenx.expancemanager.database.entity.ExpenseCategoryEntity
 import com.tenx.expancemanager.databinding.ActivityTransactionBinding
 import com.tenx.expancemanager.databinding.LayoutBottomsheetCustomizeBinding
-import com.tenx.expancemanager.model.BottomSheetCategoryModel
+import kotlinx.coroutines.launch
 
 class TransactionActivity : AppCompatActivity() {
     private val binding: ActivityTransactionBinding by lazy {
         ActivityTransactionBinding.inflate(layoutInflater)
     }
+    private lateinit var db: AppDatabase
+    private lateinit var expenseCategoryDao: ExpenseCategoryDao
+    private lateinit var mList: ArrayList<ExpenseCategoryEntity>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
-        clicklistners()
+        initVar()
+
+        clickListeners()
     }
 
-    private fun clicklistners() {
+    private fun initVar() {
+//        mList = ArrayList<ExpenseCategoryEntity>()
+        db = AppDatabase.getDatabase(this)
+        expenseCategoryDao = db.expenseCategoryDao()
+        lifecycleScope.launch {
+            mList = expenseCategoryDao.getAll() as ArrayList<ExpenseCategoryEntity>
+        }
+    }
+
+
+
+    private fun clickListeners() {
         binding.ivBack.setOnClickListener {
             finish()
         }
-
 
         binding.ivSort.setOnClickListener {
             popupMenu()
         }
 
         binding.ivCustomize.setOnClickListener {
-
             val bottomSheet = BottomSheetDialog(this)
-            val binding: LayoutBottomsheetCustomizeBinding by lazy {
+            val bindingBottomSheet: LayoutBottomsheetCustomizeBinding by lazy {
                 LayoutBottomsheetCustomizeBinding.inflate(layoutInflater)
             }
-            val mList= ArrayList<BottomSheetCategoryModel>()
-            val adopter= RecyclerCustomizeCategoryAdopter(mList)
+            bottomSheet.setContentView(bindingBottomSheet.root)
 
-            mList.add(BottomSheetCategoryModel(R.drawable.more,"More"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_food,"Food & Dining"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_shop,"Shopping"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_travel,"More"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_entertainment,"More"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_health,"More"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_personal_care,"More"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_education,"Education"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_bill,"Bill and Utilities"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_investment,"Investment"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_rent,"Rent"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_tex,"Taxes"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_insurance,"Insurance"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_gift,"Gifts & Donation"))
-            mList.add(BottomSheetCategoryModel(R.drawable.icon_gift,"Gifts & Donation"))
+            bindingBottomSheet.rvCategory.layoutManager =
+                StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL)
+            bindingBottomSheet.rvCategory.adapter = RecyclerCustomizeCategoryAdopter(mList)
 
-
-
-            bottomSheet.setContentView(binding.root)
-
-            binding.rvCategory.layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL)
-            binding.rvCategory.adapter = adopter
+            bindingBottomSheet.close.setOnClickListener {
+                bottomSheet.dismiss()
+            }
 
             bottomSheet.show()
         }

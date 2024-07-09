@@ -14,8 +14,8 @@ interface IncomeDao {
     suspend fun getAll(): List<IncomeEntity>
 
     @Query("SELECT SUM(amount) FROM income")
-    suspend fun totalIncome(): Int
+    suspend fun totalIncome(): Int?
 
     @Query("SELECT category FROM income")
-    suspend fun category(): String
+    suspend fun category(): String?
 }

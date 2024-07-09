@@ -3,27 +3,29 @@ package com.tenx.expancemanager.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.Date
 
 @Entity(tableName = "income")
 data class IncomeEntity (
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
     val iId: Int = 0,
-    @ColumnInfo
+    @ColumnInfo(name = "amount")
     val amount: Int = 0,
-    @ColumnInfo
-    val date: String = "",
-    @ColumnInfo
+    @ColumnInfo(name = "date")
+    val date: String ,
+    @ColumnInfo(name = "time")
     val time: String = "",
-    @ColumnInfo
+    @ColumnInfo(name = "category")
     val category: String? = null,
-    @ColumnInfo
+    @ColumnInfo(name = "payment_method")
     val payment: String? = null,
-    @ColumnInfo
+    @ColumnInfo(name = "notes")
     val note: String? = null,
-    @ColumnInfo
+    @ColumnInfo(name = "tag")
     val tag: String?=null ,
-    @ColumnInfo
+    @ColumnInfo(name = "img_category")
     val imgCategory: Int , // Assuming these fields exist
-    @ColumnInfo
+    @ColumnInfo(name = "img")
     val img: Int
 )

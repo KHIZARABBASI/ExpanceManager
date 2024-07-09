@@ -22,7 +22,7 @@ class UpdateFinanceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
-        //changeStatusBarColor(R.color.btn_gmail_color)
+
 
         adopter = UpdateFinancePagerAdopter(supportFragmentManager,lifecycle)
 

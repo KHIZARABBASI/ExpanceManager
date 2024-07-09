@@ -1,14 +1,19 @@
 package com.tenx.expancemanager.adopter
 
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tenx.expancemanager.database.entity.ExpenseEntity
 import com.tenx.expancemanager.database.entity.IncomeEntity
+import com.tenx.expancemanager.database.entity.TransctionEntity
 import com.tenx.expancemanager.databinding.RowExpanseLayoutBinding
-import com.tenx.expancemanager.databinding.RowTransectionLayoutBinding
+import com.tenx.expancemanager.databinding.RowFinanceCategoryLayoutBinding
+import com.tenx.expancemanager.databinding.RowIncomeLayoutBinding
 
-class RecyclerTransecionAdopter(private var dataList: List<Any>) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+
+class RecyclerTransecionAdopter(private var dataList: List<Any>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
 
     companion object {
         private const val VIEW_TYPE_EXPENSE = 1
@@ -21,6 +26,8 @@ class RecyclerTransecionAdopter(private var dataList: List<Any>) : RecyclerView.
             is IncomeEntity -> VIEW_TYPE_INCOME
             else -> throw IllegalArgumentException("Invalid type of data $position")
         }
+
+        return dataList.size
     }
 
     override fun onCreateViewHolder(
@@ -29,19 +36,28 @@ class RecyclerTransecionAdopter(private var dataList: List<Any>) : RecyclerView.
     ): RecyclerView.ViewHolder {
         return when (viewType) {
             VIEW_TYPE_EXPENSE -> {
-                val binding = RowTransectionLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                ViewHolder1(binding)
+                val binding1 = RowExpanseLayoutBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+                ViewHolder1(binding1)
             }
+
             VIEW_TYPE_INCOME -> {
-                val binding1 = RowExpanseLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                ViewHolder2(binding1)
+                val binding2 = RowIncomeLayoutBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+                ViewHolder2(binding2)
             }
+
             else -> throw IllegalArgumentException("Invalid view type")
+
+
         }
     }
-
-
-
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -55,7 +71,8 @@ class RecyclerTransecionAdopter(private var dataList: List<Any>) : RecyclerView.
     override fun getItemCount(): Int = dataList.size
 
 
-    inner class ViewHolder1(val binding: RowTransectionLayoutBinding): RecyclerView.ViewHolder(binding.root){
+    inner class ViewHolder1(val binding: RowExpanseLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(expense: ExpenseEntity) {
             binding.tvDate.text = expense.date
             binding.tvExpense.text = expense.amount.toString()
@@ -63,11 +80,15 @@ class RecyclerTransecionAdopter(private var dataList: List<Any>) : RecyclerView.
 
         }
     }
-    inner class ViewHolder2(val binding: RowExpanseLayoutBinding): RecyclerView.ViewHolder(binding.root) {
+
+    inner class ViewHolder2(val binding: RowIncomeLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(income: IncomeEntity) {
             binding.tvDate.text = income.date
             binding.tvExpense.text = income.amount.toString()
             binding.tvCatagory.text = income.category
+            binding.ivCategory.setImageResource(income.img)
+            binding.ivPaymentMethod.setImageResource(income.imgCategory)
 
         }
     }
@@ -78,3 +99,38 @@ class RecyclerTransecionAdopter(private var dataList: List<Any>) : RecyclerView.
         notifyDataSetChanged()
     }
 }
+    /*
+    class ViewHolder(val binding: RowIncomeLayoutBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: TransctionEntity) {
+
+            binding.tvDate.text= item.date
+            binding.ivCategory.setImageResource(item.imgCategory)
+            binding.ivPaymentMethod.setImageResource(item.img)
+            binding.tvCatagory.text= item.category
+            binding.tvExpense.text= item.payment
+        }
+
+
+    }
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = RowIncomeLayoutBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
+        return ViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = mList[position]
+        holder.bind(item)
+    }
+
+    override fun getItemCount(): Int {
+        return  mList.size
+    }
+
+
+
+
+}*/
