@@ -1,5 +1,6 @@
 package com.tenx.expancemanager.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -41,6 +42,10 @@ class CategoryActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 Log.e("ExpenseFragment", "Error fetching categories: ${e.message}")
             }
+        }
+
+        binding.fabAdd.setOnClickListener {
+            startActivity(Intent(this, EditCategoryActivity::class.java))
         }
 
     }

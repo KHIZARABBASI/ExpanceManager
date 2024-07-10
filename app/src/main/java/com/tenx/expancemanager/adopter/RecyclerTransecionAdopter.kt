@@ -14,7 +14,6 @@ import com.tenx.expancemanager.databinding.RowIncomeLayoutBinding
 
 class RecyclerTransecionAdopter(private var dataList: List<Any>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-
     companion object {
         private const val VIEW_TYPE_EXPENSE = 1
         private const val VIEW_TYPE_INCOME = 2
@@ -99,15 +98,16 @@ class RecyclerTransecionAdopter(private var dataList: List<Any>) : RecyclerView.
         notifyDataSetChanged()
     }
 }
+
     /*
-    class ViewHolder(val binding: RowIncomeLayoutBinding): RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val binding: RowIncomeLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: TransctionEntity) {
 
-            binding.tvDate.text= item.date
+            binding.tvDate.text = item.date
             binding.ivCategory.setImageResource(item.imgCategory)
             binding.ivPaymentMethod.setImageResource(item.img)
-            binding.tvCatagory.text= item.category
-            binding.tvExpense.text= item.payment
+            binding.tvCatagory.text = item.category
+            binding.tvExpense.text = item.payment
         }
 
 
@@ -127,10 +127,11 @@ class RecyclerTransecionAdopter(private var dataList: List<Any>) : RecyclerView.
     }
 
     override fun getItemCount(): Int {
-        return  mList.size
+        return mList.size
     }
 
-
-
-
+    fun updateList(newList: List<TransctionEntity>) {
+        mList = newList
+        notifyDataSetChanged()
+    }
 }*/

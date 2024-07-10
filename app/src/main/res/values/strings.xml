@@ -53,6 +53,7 @@ Track your spending &amp; income.
     <string name="add_tags">Add Tages</string>
     <string name="add_attach">Add Attach</string>
     <string name="select_category">Select Category</string>
+    <string name="add_category">Add Category</string>
     <string name="payment_category">Select Payment Mode</string>
     <string name="search">Search here</string>
     <string name="date_created">Date Created</string>
@@ -74,6 +75,7 @@ Track your spending &amp; income.
     <string name="bank_account">Bank Account</string>
     <string name="show_balance">Show Balance</string>
     <string name="encript">*******</string>
+    <string name="category_name">Category Name</string>
 
 
 </resources>
