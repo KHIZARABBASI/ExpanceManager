@@ -9,6 +9,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.tenx.expancemanager.database.dao.ExpenseCategoryDao
 import com.tenx.expancemanager.database.dao.ExpenseDao
+import com.tenx.expancemanager.database.dao.IncomeCategoryDao
 import com.tenx.expancemanager.database.dao.IncomeDao
 import com.tenx.expancemanager.database.dao.TransctionDao
 import com.tenx.expancemanager.database.entity.ExpenseCategoryEntity
@@ -27,6 +28,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun expenseDao(): ExpenseDao
     abstract fun incomeDao(): IncomeDao
     abstract fun expenseCategoryDao(): ExpenseCategoryDao
+    abstract fun incomeCategoryDao(): IncomeCategoryDao
     abstract fun transectionDao(): TransctionDao
 
 

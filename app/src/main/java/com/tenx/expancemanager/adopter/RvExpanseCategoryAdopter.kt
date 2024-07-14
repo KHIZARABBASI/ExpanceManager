@@ -1,15 +1,23 @@
 package com.tenx.expancemanager.adopter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tenx.expancemanager.database.entity.ExpenseCategoryEntity
-import com.tenx.expancemanager.databinding.RowCircularCategogryLayoutBinding
+import com.tenx.expancemanager.database.entity.IncomeCategoryEntity
 import com.tenx.expancemanager.databinding.RowFinanceCategoryLayoutBinding
 
-class RecyclerExpanseCategoryAdopter(
-    private val mList: ArrayList<ExpenseCategoryEntity>
-) : RecyclerView.Adapter<RecyclerExpanseCategoryAdopter.ViewHolder>() {
+class RvExpanseCategoryAdopter(
+    private val context: Context,
+    private val mList: ArrayList<ExpenseCategoryEntity>,
+    private val itemClickListener: RvExpanseCategoryAdopter.OnItemClickListener
+) : RecyclerView.Adapter<RvExpanseCategoryAdopter.ViewHolder>() {
+
+
+    interface OnItemClickListener{
+        fun onItemClick(item: ExpenseCategoryEntity)
+    }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -27,6 +35,10 @@ class RecyclerExpanseCategoryAdopter(
     ) {
         val item = mList[position]
         holder.bind(item)
+
+        holder.itemView.setOnClickListener {
+            itemClickListener.onItemClick(item)
+        }
     }
 
     override fun getItemCount(): Int {

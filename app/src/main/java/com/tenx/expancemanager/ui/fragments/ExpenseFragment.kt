@@ -1,6 +1,7 @@
 package com.tenx.expancemanager.ui.fragments
 
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.icu.util.Calendar
@@ -10,23 +11,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tenx.expancemanager.R
-import com.tenx.expancemanager.adopter.RecyclerExpanseCategoryAdopter
+import com.tenx.expancemanager.adopter.RvExpanseCategoryAdopter
 import com.tenx.expancemanager.database.appDatabase.AppDatabase
 import com.tenx.expancemanager.database.dao.ExpenseCategoryDao
 import com.tenx.expancemanager.database.dao.ExpenseDao
-import com.tenx.expancemanager.database.dao.IncomeCategoryDao
 import com.tenx.expancemanager.database.dao.TransctionDao
 import com.tenx.expancemanager.database.entity.ExpenseCategoryEntity
 import com.tenx.expancemanager.database.entity.ExpenseEntity
 import com.tenx.expancemanager.database.entity.TransctionEntity
 import com.tenx.expancemanager.databinding.FragmentExpenseBinding
+import com.tenx.expancemanager.databinding.FragmentIncomBinding
 import com.tenx.expancemanager.databinding.LayoutBottomSheetCategoryBinding
-import com.tenx.expancemanager.model.BottomSheetCategoryModel
+import com.tenx.expancemanager.databinding.LayoutBottomSheetPaymentMethodBinding
 import com.tenx.expancemanager.ui.activity.DashboardActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,23 +36,24 @@ import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class ExpenseFragment : Fragment() {
-    private val binding: FragmentExpenseBinding by lazy {
-        FragmentExpenseBinding.inflate(layoutInflater)
-    }
+class ExpenseFragment : Fragment(),RvExpanseCategoryAdopter.OnItemClickListener {
+    private lateinit var binding: FragmentExpenseBinding
     private lateinit var cal: Calendar
     private lateinit var db: AppDatabase
     private lateinit var expenseCategoryDao: ExpenseCategoryDao
     private lateinit var expenseDao: ExpenseDao
     private lateinit var tarnsectionDao : TransctionDao
     private lateinit var callback: OnBackPressedCallback
+    private lateinit var dialog: Dialog
     private lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
+    private var cashAmount: String = "0.0"
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
+        binding = FragmentExpenseBinding.inflate(inflater, container, false)
         initVar()
         onClickListener()
 
@@ -82,6 +85,31 @@ class ExpenseFragment : Fragment() {
                 cal.get(Calendar.MINUTE),
                 true
             ).show()
+        }
+
+
+        binding.clPayment.setOnClickListener {
+            val dialog = BottomSheetDialog(requireContext())
+            val bindingBottomSheet = LayoutBottomSheetPaymentMethodBinding.inflate(layoutInflater)
+            dialog.setContentView(bindingBottomSheet.root)
+            bindingBottomSheet.close.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
+
+            bindingBottomSheet.radioGroup.setOnCheckedChangeListener { group, checkedId ->
+                val selectedRadioButton: RadioButton = group.findViewById(checkedId)
+                binding.tvCash.text = selectedRadioButton.text.toString()
+                dialog.dismiss()
+            }
+
+            bindingBottomSheet.btnSwitch.setOnCheckedChangeListener { _, isChecked ->
+                bindingBottomSheet.cashAmount.text = if (isChecked) {
+                    cashAmount
+                } else {
+                    getString(R.string.encript)
+                }
+            }
         }
 
         binding.clCategory.setOnClickListener {
@@ -147,6 +175,12 @@ class ExpenseFragment : Fragment() {
             val sdf = SimpleDateFormat(myFormat, Locale.US)
             binding.tvDate.text = sdf.format(cal.time)
         }
+
+        lifecycleScope.launch {
+            cashAmount = withContext(Dispatchers.IO) {
+                expenseDao.totalExpense().toString()
+            }
+        }
     }
 
     private fun saveUser(
@@ -182,7 +216,7 @@ class ExpenseFragment : Fragment() {
     }
 
     private fun showCategoryDialog() {
-        val dialog = BottomSheetDialog(requireContext())
+        dialog = BottomSheetDialog(requireContext())
         val bindingBottomSheet = LayoutBottomSheetCategoryBinding.inflate(layoutInflater)
         dialog.setContentView(bindingBottomSheet.root)
 
@@ -193,12 +227,17 @@ class ExpenseFragment : Fragment() {
         lifecycleScope.launch {
             try {
                 val mList = expenseCategoryDao.getAll() as ArrayList<ExpenseCategoryEntity>
-                val adapter = RecyclerExpanseCategoryAdopter(mList)
+                val adapter = RvExpanseCategoryAdopter(requireContext(),mList,this@ExpenseFragment)
                 bindingBottomSheet.rvCategory.adapter = adapter
                 dialog.show()
             } catch (e: Exception) {
                 Log.e("ExpenseFragment", "Error fetching categories: ${e.message}")
             }
         }
+    }
+
+    override fun onItemClick(item: ExpenseCategoryEntity) {
+        binding.tvOther.text = item.name
+        dialog.dismiss()
     }
 }

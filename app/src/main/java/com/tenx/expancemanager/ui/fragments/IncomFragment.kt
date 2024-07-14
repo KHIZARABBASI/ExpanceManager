@@ -1,6 +1,7 @@
 package com.tenx.expancemanager.ui.fragments
 
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -15,60 +16,55 @@ import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.tenx.expancemanager.R
-import com.tenx.expancemanager.adopter.RecyclerExpanseCategoryAdopter
-import com.tenx.expancemanager.adopter.RecyclerIncomeCategoryAdopter
+import com.tenx.expancemanager.adopter.RvIncomeCategoryAdopter
 import com.tenx.expancemanager.database.appDatabase.AppDatabase
-import com.tenx.expancemanager.database.dao.ExpenseDao
+import com.tenx.expancemanager.database.dao.IncomeCategoryDao
 import com.tenx.expancemanager.database.dao.IncomeDao
 import com.tenx.expancemanager.database.dao.TransctionDao
-import com.tenx.expancemanager.database.entity.ExpenseEntity
+import com.tenx.expancemanager.database.entity.IncomeCategoryEntity
 import com.tenx.expancemanager.database.entity.IncomeEntity
 import com.tenx.expancemanager.database.entity.TransctionEntity
 import com.tenx.expancemanager.databinding.FragmentIncomBinding
 import com.tenx.expancemanager.databinding.LayoutBottomSheetCategoryBinding
 import com.tenx.expancemanager.databinding.LayoutBottomSheetPaymentMethodBinding
-import com.tenx.expancemanager.model.BottomSheetCategoryModel
 import com.tenx.expancemanager.ui.activity.DashboardActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 
-class IncomFragment : Fragment() {
-    private val binding: FragmentIncomBinding by lazy {
-        FragmentIncomBinding.inflate(layoutInflater)
-    }
+class IncomFragment : Fragment(), RvIncomeCategoryAdopter.OnItemClickListener {
+    private lateinit var binding: FragmentIncomBinding
     private lateinit var cal: android.icu.util.Calendar
     private lateinit var db: AppDatabase
-    private lateinit var tarnsectionDao : TransctionDao
+    private lateinit var tarnsectionDao: TransctionDao
     private lateinit var incomeDao: IncomeDao
+    private lateinit var incomeCategoryDao: IncomeCategoryDao
     private lateinit var callback: OnBackPressedCallback
     private lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
+    private var cashAmount: String = "0.0"
+    private lateinit var dialog: Dialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        intvar()
-
+        binding = FragmentIncomBinding.inflate(inflater, container, false)
+        initVars()
         return binding.root
     }
 
-    private fun intvar() {
+    private fun initVars() {
         db = AppDatabase.getDatabase(requireContext())
         incomeDao = db.incomeDao()
         tarnsectionDao = db.transectionDao()
+        incomeCategoryDao = db.incomeCategoryDao()
 
-        callback = object : OnBackPressedCallback(true /* enabled by default */) {
+        callback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 requireContext().startActivity(
-                    Intent(
-                        requireContext(),
-                        DashboardActivity::class.java
-                    )
+                    Intent(requireContext(), DashboardActivity::class.java)
                 )
             }
         }
@@ -85,21 +81,24 @@ class IncomFragment : Fragment() {
             cal.set(android.icu.util.Calendar.YEAR, year)
             cal.set(android.icu.util.Calendar.MONTH, monthOfYear)
             cal.set(android.icu.util.Calendar.DAY_OF_MONTH, dayOfMonth)
-
-            val myFormat = "dd.MM.yyyy" // mention the format you need
+            val myFormat = "dd.MM.yyyy"
             val sdf = SimpleDateFormat(myFormat, Locale.US)
             binding.tvDate.text = sdf.format(cal.time)
+        }
 
+        lifecycleScope.launch {
+            cashAmount = withContext(Dispatchers.IO) {
+                incomeDao.totalIncome().toString()
+            }
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        onClickListener()
+        setupListeners()
     }
 
-    private fun onClickListener() {
+    private fun setupListeners() {
         binding.tvDate.setOnClickListener {
             DatePickerDialog(
                 requireContext(), dateSetListener,
@@ -110,7 +109,7 @@ class IncomFragment : Fragment() {
         }
 
         binding.tvTime.setOnClickListener {
-            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
                 cal.set(android.icu.util.Calendar.HOUR_OF_DAY, hour)
                 cal.set(android.icu.util.Calendar.MINUTE, minute)
                 binding.tvTime.text = SimpleDateFormat("h:mm a", Locale.US).format(cal.time)
@@ -119,48 +118,22 @@ class IncomFragment : Fragment() {
                 requireContext(),
                 timeSetListener,
                 cal.get(android.icu.util.Calendar.HOUR_OF_DAY),
-                cal.get(
-                    android.icu.util.Calendar.MINUTE
-                ),
+                cal.get(android.icu.util.Calendar.MINUTE),
                 true
             ).show()
         }
+
         binding.clCategory.setOnClickListener {
-            val dialog = BottomSheetDialog(requireContext())
-            val adapter: RecyclerExpanseCategoryAdopter
-            val bindingBottomSheet: LayoutBottomSheetCategoryBinding by lazy {
-                LayoutBottomSheetCategoryBinding.inflate(layoutInflater)
-            }
-            dialog.setContentView(bindingBottomSheet.root)
-
-            bindingBottomSheet.close.setOnClickListener {
-                dialog.dismiss()
-            }
-
-//
-//            val mList: ArrayList<BottomSheetCategoryModel> = arrayListOf(
-//                BottomSheetCategoryModel(R.drawable.more, "Other"),
-//                BottomSheetCategoryModel(R.drawable.icon_food, "Salary"),
-//                BottomSheetCategoryModel(R.drawable.icon_shop, "Sold Item"),
-//                BottomSheetCategoryModel(R.drawable.icon_shop, "Coupons")
-//            )
-//
-//            adapter = RecyclerExpanseCategoryAdopter(mList)
-//            bindingBottomSheet.rvCategory.adapter = adapter
-
-            dialog.show()
+            showCategoryDialog()
         }
 
         binding.clPayment.setOnClickListener {
             val dialog = BottomSheetDialog(requireContext())
-            val bindingBottomSheet: LayoutBottomSheetPaymentMethodBinding by lazy {
-                LayoutBottomSheetPaymentMethodBinding.inflate(layoutInflater)
-            }
+            val bindingBottomSheet = LayoutBottomSheetPaymentMethodBinding.inflate(layoutInflater)
             dialog.setContentView(bindingBottomSheet.root)
             bindingBottomSheet.close.setOnClickListener {
                 dialog.dismiss()
             }
-
             dialog.show()
 
             bindingBottomSheet.radioGroup.setOnCheckedChangeListener { group, checkedId ->
@@ -169,8 +142,13 @@ class IncomFragment : Fragment() {
                 dialog.dismiss()
             }
 
-
-
+            bindingBottomSheet.btnSwitch.setOnCheckedChangeListener { _, isChecked ->
+                bindingBottomSheet.cashAmount.text = if (isChecked) {
+                    cashAmount
+                } else {
+                    getString(R.string.encript)
+                }
+            }
         }
 
         binding.saveIncome.setOnClickListener {
@@ -178,42 +156,110 @@ class IncomFragment : Fragment() {
             val date = binding.tvDate.text.toString()
             val time = binding.tvTime.text.toString()
             val category = binding.tvOther.text.toString()
-            val payment = binding.tvCategory.text.toString()
+            val payment = binding.tvMethod.text.toString()
             val notes = binding.etNote.text.toString()
             val tag = "Test"
             val img = R.drawable.icon_bank
             val imgCategory = R.drawable.category
 
-
-
             if (amount > 0) {
-                saveUser(amount, date, time, category, payment, notes, tag, img, imgCategory)
+                saveIncome(amount, date, time, category, payment, notes, tag, img, imgCategory)
             } else {
-                Toast.makeText(requireContext(), "Please enter a valid amount", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please enter a valid amount", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
-
     }
 
-    private fun saveUser(amount: Int, date: String, time: String, category: String, payment: String, note: String, tag: String, img: Int, imgCategory: Int) {
-        val user = IncomeEntity(0, amount, date, time, category, payment, note, tag, img, imgCategory)
-        val user1 = TransctionEntity(0, amount, date, time, category, payment, note, tag, img, imgCategory)
+//    private fun showCategoryDialog() {
+//        dialog = BottomSheetDialog(requireContext())
+//        val bindingBottomSheet = LayoutBottomSheetCategoryBinding.inflate(layoutInflater)
+//        dialog.setContentView(bindingBottomSheet.root)
+//
+//        bindingBottomSheet.close.setOnClickListener {
+//            dialog.dismiss()
+//        }
+//
+//        lifecycleScope.launch {
+//            try {
+//                val categories = withContext(Dispatchers.IO) {
+//                    incomeCategoryDao.getAll()
+//                }
+//                val adapter = RvIncomeCategoryAdopter(
+//                    requireContext(),
+//                    categories as ArrayList<IncomeCategoryEntity>
+//                )
+//                bindingBottomSheet.rvCategory.adapter = adapter
+//                dialog.show()
+//            } catch (e: Exception) {
+//                Log.e("IncomFragment", "Error fetching categories: ${e.message}")
+//            }
+//        }
+//    }
+
+    private fun showCategoryDialog() {
+        dialog = BottomSheetDialog(requireContext())
+        val bindingBottomSheet = LayoutBottomSheetCategoryBinding.inflate(layoutInflater)
+        dialog.setContentView(bindingBottomSheet.root)
+
+        bindingBottomSheet.close.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        lifecycleScope.launch {
+            try {
+                val categories = withContext(Dispatchers.IO) {
+                    incomeCategoryDao.getAll()
+                }
+                val adapter = RvIncomeCategoryAdopter(
+                    requireContext(),
+                    categories as ArrayList<IncomeCategoryEntity>,
+                    this@IncomFragment
+                )
+                bindingBottomSheet.rvCategory.adapter = adapter
+                dialog.show()
+            } catch (e: Exception) {
+                Log.e("IncomFragment", "Error fetching categories: ${e.message}")
+            }
+        }
+    }
+
+    private fun saveIncome(
+        amount: Int,
+        date: String,
+        time: String,
+        category: String,
+        payment: String,
+        note: String,
+        tag: String,
+        img: Int,
+        imgCategory: Int
+    ) {
+        val income =
+            IncomeEntity(0, amount, date, time, category, payment, note, tag, img, imgCategory)
+        val transaction =
+            TransctionEntity(0, amount, date, time, category, payment, note, tag, img, imgCategory)
 
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                tarnsectionDao.insert(user1)
-                incomeDao.insert(user)
+                tarnsectionDao.insert(transaction)
+                incomeDao.insert(income)
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), "Saved Successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Saved Successfully", Toast.LENGTH_SHORT)
+                        .show()
                 }
             } catch (e: Exception) {
-                Log.e("saveUserError", "Error saving user: ${e.message}")
+                Log.e("saveIncomeError", "Error saving income: ${e.message}")
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), "Failed to save user", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Failed to save income", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
     }
 
+    override fun onItemClick(item: IncomeCategoryEntity) {
+        binding.tvOther.text = item.name
+        dialog.dismiss()
+    }
 }
-

@@ -76,6 +76,16 @@ Track your spending &amp; income.
     <string name="show_balance">Show Balance</string>
     <string name="encript">*******</string>
     <string name="category_name">Category Name</string>
+    <string name="no_Budget_heading">No Budgets Set!</string>
+    <string name="no_budget_body">Settings Up a budget lets you plan your\nexpenditure, and it ensures that you meet your\ngoal of saving the desired amount of money at the\nend of the month.</string>
+    <string name="total_budget">Total Budget</string>
+    <string name="category_budget">Set Category Wise Budget</string>
+    <string name="budget_tips">Budgeting tip</string>
+    <string name="budget_tip_heading">Save First, Then Spend</string>
+    <string name="budget_tip_body"><![CDATA[Most people choose to spend first and then save what’s leftover. This makes saving optional & doesn’t ensure consistent saving contribution. Think of saving as a fixed expense & factor it into your budget accordingly. “ Do not save what is left after spending; instead spend what is left after saving. “Who can argue with Warren Buffett?]]></string>
+    <string name="category_wise_budget">Category-wise Budget</string>
+    <string name="week">week</string>
+    <string name="year">Year</string>
 
 
 </resources>

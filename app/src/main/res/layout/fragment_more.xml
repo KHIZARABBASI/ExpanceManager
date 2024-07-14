@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragments.MoreFragment"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    tools:context=".ui.fragments.MoreFragment">
 
     <!--    Profile Card-->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -94,296 +94,310 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--first row-->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/catagory_transction"
-        android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_55sdp"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:background="@drawable/style_button_primary"
-        android:backgroundTint="@color/options_clr"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        android:elevation="@dimen/_55sdp">
 
-        <ImageView
-            android:id="@+id/iv_trx"
-            style="@style/category_img"
-            app:layout_constraintBottom_toBottomOf="parent"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_12sdp"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/menu"/>
+            app:layout_constraintTop_toTopOf="parent">
+            <!--first row-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/catagory_transction"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_55sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:background="@drawable/style_button_primary"
+                android:backgroundTint="@color/options_clr"
+                android:elevation="@dimen/_55sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/transaction"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_trx"
-            app:layout_constraintStart_toEndOf="@+id/iv_trx"
-            app:layout_constraintTop_toTopOf="@+id/iv_trx"
-            style="@style/category_text"/>
+                <ImageView
+                    android:id="@+id/iv_trx"
+                    style="@style/category_img"
+                    android:src="@drawable/menu"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    style="@style/category_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/transaction"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_trx"
+                    app:layout_constraintStart_toEndOf="@+id/iv_trx"
+                    app:layout_constraintTop_toTopOf="@+id/iv_trx" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/catagory_scadule_trx"
-        android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_55sdp"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
-        android:background="@drawable/style_button_primary"
-        android:backgroundTint="@color/options_clr"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" >
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/iv_scheduled"
-            style="@style/category_img"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/sechedual"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/catagory_scadule_trx"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_55sdp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:background="@drawable/style_button_primary"
+                android:backgroundTint="@color/options_clr"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Scheduled_trx"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_scheduled"
-            app:layout_constraintStart_toEndOf="@+id/iv_scheduled"
-            app:layout_constraintTop_toTopOf="@+id/iv_scheduled"
-            style="@style/category_text"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/iv_scheduled"
+                    style="@style/category_img"
+                    android:src="@drawable/sechedual"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-<!--    second row-->
+                <TextView
+                    style="@style/category_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Scheduled_trx"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_scheduled"
+                    app:layout_constraintStart_toEndOf="@+id/iv_scheduled"
+                    app:layout_constraintTop_toTopOf="@+id/iv_scheduled" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/catagory_budget"
-        android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_55sdp"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:background="@drawable/style_button_primary"
-        android:backgroundTint="@color/options_clr"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/catagory_transction"
-        android:elevation="@dimen/_55sdp">
+            <!--    second row-->
 
-        <ImageView
-            android:id="@+id/iv_budget"
-            style="@style/category_img"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/budget"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/catagory_budget"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_55sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:background="@drawable/style_button_primary"
+                android:backgroundTint="@color/options_clr"
+                android:elevation="@dimen/_55sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/catagory_transction">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/budgets"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_budget"
-            app:layout_constraintStart_toEndOf="@+id/iv_budget"
-            app:layout_constraintTop_toTopOf="@+id/iv_budget"
-            style="@style/category_text"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/iv_budget"
+                    style="@style/category_img"
+                    android:src="@drawable/budget"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/catagory_categories"
-        android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_55sdp"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
-        android:background="@drawable/style_button_primary"
-        android:backgroundTint="@color/options_clr"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/catagory_transction" >
+                <TextView
+                    style="@style/category_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/budgets"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_budget"
+                    app:layout_constraintStart_toEndOf="@+id/iv_budget"
+                    app:layout_constraintTop_toTopOf="@+id/iv_budget" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/iv_category"
-            style="@style/category_img"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/category"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/catagory_categories"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_55sdp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:background="@drawable/style_button_primary"
+                android:backgroundTint="@color/options_clr"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/catagory_transction">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/categories"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_category"
-            app:layout_constraintStart_toEndOf="@+id/iv_category"
-            app:layout_constraintTop_toTopOf="@+id/iv_category"
-            style="@style/category_text"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/iv_category"
+                    style="@style/category_img"
+                    android:src="@drawable/category"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-
-<!--    third row-->
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/catagory_tages"
-        android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_55sdp"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:background="@drawable/style_button_primary"
-        android:backgroundTint="@color/options_clr"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/catagory_budget"
-        android:elevation="@dimen/_55sdp">
-        <ImageView
-            android:id="@+id/iv_tag"
-            style="@style/category_img"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/tag"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tags"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_tag"
-            app:layout_constraintStart_toEndOf="@+id/iv_tag"
-            app:layout_constraintTop_toTopOf="@+id/iv_tag"
-            style="@style/category_text"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/catagory_premum"
-        android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_55sdp"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
-        android:background="@drawable/style_button_primary"
-        android:backgroundTint="@color/options_clr"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/catagory_categories">
-        <ImageView
-            android:id="@+id/iv_premium"
-            style="@style/category_img"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/primimum"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/premium"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_premium"
-            app:layout_constraintStart_toEndOf="@+id/iv_premium"
-            app:layout_constraintTop_toTopOf="@+id/iv_premium"
-            style="@style/category_text"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    style="@style/category_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/categories"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_category"
+                    app:layout_constraintStart_toEndOf="@+id/iv_category"
+                    app:layout_constraintTop_toTopOf="@+id/iv_category" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <TextView
-        android:id="@+id/tv_view"
-        style="@style/amount_code"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_24sdp"
-        android:text="@string/view"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/catagory_tages" />
+            <!--    third row-->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/catagory_tages"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_55sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:background="@drawable/style_button_primary"
+                android:backgroundTint="@color/options_clr"
+                android:elevation="@dimen/_55sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/catagory_budget">
+
+                <ImageView
+                    android:id="@+id/iv_tag"
+                    style="@style/category_img"
+                    android:src="@drawable/tag"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/category_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tags"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_tag"
+                    app:layout_constraintStart_toEndOf="@+id/iv_tag"
+                    app:layout_constraintTop_toTopOf="@+id/iv_tag" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/catagory_premum"
+                android:layout_width="@dimen/_130sdp"
+                android:layout_height="@dimen/_55sdp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:background="@drawable/style_button_primary"
+                android:backgroundTint="@color/options_clr"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/catagory_categories">
+
+                <ImageView
+                    android:id="@+id/iv_premium"
+                    style="@style/category_img"
+                    android:src="@drawable/primimum"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/category_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/premium"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_premium"
+                    app:layout_constraintStart_toEndOf="@+id/iv_premium"
+                    app:layout_constraintTop_toTopOf="@+id/iv_premium" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-<!--    views row-->
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_day"
-        android:layout_width="@dimen/_90sdp"
-        android:layout_height="@dimen/_80sdp"
-        android:layout_marginTop="@dimen/_25sdp"
-        android:background="@drawable/style_button_primary"
-        android:backgroundTint="@color/options_clr"
-        android:elevation="@dimen/_55sdp"
-        app:layout_constraintEnd_toStartOf="@+id/cl_month"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_view">
-
-        <ImageView
-            android:id="@+id/iv_day"
-            style="@style/category_img"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/icon_day"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            style="@style/category_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/day"
-            app:layout_constraintEnd_toEndOf="@+id/iv_day"
-            app:layout_constraintStart_toStartOf="@+id/iv_day"
-            app:layout_constraintTop_toBottomOf="@+id/iv_day" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_month"
-        android:layout_width="@dimen/_90sdp"
-        android:layout_height="@dimen/_80sdp"
-        android:background="@drawable/style_button_primary"
-        android:backgroundTint="@color/options_clr"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cl_day">
-
-        <ImageView
-            android:id="@+id/iv_month"
-            style="@style/category_img"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/icon_month"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            style="@style/category_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/month"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_month" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_custom"
-        android:layout_width="@dimen/_90sdp"
-        android:layout_height="@dimen/_80sdp"
-        android:background="@drawable/style_button_primary"
-        android:backgroundTint="@color/options_clr"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/cl_month"
-        app:layout_constraintTop_toTopOf="@+id/cl_month">
-
-        <ImageView
-            android:id="@+id/iv_custom"
-            style="@style/category_img"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:src="@drawable/icon_custom"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            style="@style/category_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/custom"
-            app:layout_constraintEnd_toEndOf="@+id/iv_custom"
-            app:layout_constraintStart_toStartOf="@+id/iv_custom"
-            app:layout_constraintTop_toBottomOf="@+id/iv_custom" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_view"
+                style="@style/amount_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_24sdp"
+                android:text="@string/view"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/catagory_tages" />
 
 
+            <!--    views row-->
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_day"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:background="@drawable/style_button_primary"
+                android:backgroundTint="@color/options_clr"
+                android:elevation="@dimen/_55sdp"
+                app:layout_constraintEnd_toStartOf="@+id/cl_month"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_view">
+
+                <ImageView
+                    android:id="@+id/iv_day"
+                    style="@style/category_img"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/icon_day"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/category_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/day"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_day"
+                    app:layout_constraintStart_toStartOf="@+id/iv_day"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_day" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_month"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:background="@drawable/style_button_primary"
+                android:backgroundTint="@color/options_clr"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cl_day">
+
+                <ImageView
+                    android:id="@+id/iv_month"
+                    style="@style/category_img"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/icon_month"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/category_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/month"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_month" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_custom"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:background="@drawable/style_button_primary"
+                android:backgroundTint="@color/options_clr"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cl_month"
+                app:layout_constraintTop_toTopOf="@+id/cl_month">
+
+                <ImageView
+                    android:id="@+id/iv_custom"
+                    style="@style/category_img"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/icon_custom"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/category_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/custom"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_custom"
+                    app:layout_constraintStart_toStartOf="@+id/iv_custom"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_custom" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

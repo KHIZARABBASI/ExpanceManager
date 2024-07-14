@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.tenx.expancemanager.R
 import com.tenx.expancemanager.databinding.FragmentMoreBinding
+import com.tenx.expancemanager.ui.activity.BudgetActivity
 import com.tenx.expancemanager.ui.activity.CategoryActivity
 import com.tenx.expancemanager.ui.activity.TransactionActivity
 
@@ -38,6 +39,10 @@ class MoreFragment : Fragment() {
 
         binding.catagoryCategories.setOnClickListener {
             startActivity(Intent(requireContext(),CategoryActivity::class.java))
+        }
+
+        binding.catagoryBudget.setOnClickListener {
+            startActivity(Intent(requireContext(),BudgetActivity::class.java))
         }
     }
 

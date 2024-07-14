@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ExpanceManager"
         tools:targetApi="31">
+
+        <activity
+            android:name=".ui.activity.EditBudgetActivity"
+            android:windowSoftInputMode="adjustResize"
+
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.BudgetActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.EditCategoryActivity"
             android:exported="false" />

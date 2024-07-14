@@ -13,7 +13,9 @@ import androidx.lifecycle.lifecycleScope
 import com.tenx.expancemanager.R
 import com.tenx.expancemanager.database.appDatabase.AppDatabase
 import com.tenx.expancemanager.database.dao.ExpenseCategoryDao
+import com.tenx.expancemanager.database.dao.IncomeCategoryDao
 import com.tenx.expancemanager.database.entity.ExpenseCategoryEntity
+import com.tenx.expancemanager.database.entity.IncomeCategoryEntity
 import com.tenx.expancemanager.databinding.ActivitySplashBinding
 import kotlinx.coroutines.launch
 
@@ -23,7 +25,9 @@ class SplashActivity : AppCompatActivity() {
     }
     private lateinit var db: AppDatabase
     private lateinit var expenseCategoryDao: ExpenseCategoryDao
-    private lateinit var mList: ArrayList<ExpenseCategoryEntity>
+    private lateinit var incomeCategoryDao: IncomeCategoryDao
+    private lateinit var expenseList: ArrayList<ExpenseCategoryEntity>
+    private lateinit var incomeList: ArrayList<IncomeCategoryEntity>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,9 +47,11 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun initVar() {
-        mList = ArrayList()
+        expenseList = ArrayList()
+        incomeList = ArrayList()
         db = AppDatabase.getDatabase(this)
         expenseCategoryDao = db.expenseCategoryDao()
+        incomeCategoryDao = db.incomeCategoryDao()
     }
 
     private fun userLogin() {
@@ -67,27 +73,40 @@ class SplashActivity : AppCompatActivity() {
         Toast.makeText(this, "bool $check", Toast.LENGTH_SHORT).show()
 
         if (!check) {
-            val categories = listOf(
+            val expenseCategories = listOf(
                 ExpenseCategoryEntity(0, "More", R.drawable.more),
-                ExpenseCategoryEntity(0, "Food & Dining", R.drawable.icon_food),
-                ExpenseCategoryEntity(0, "Shopping", R.drawable.icon_shop),
-                ExpenseCategoryEntity(0, "Travel", R.drawable.icon_travel),
-                ExpenseCategoryEntity(0, "Entertainment", R.drawable.icon_entertainment),
-                ExpenseCategoryEntity(0, "Health", R.drawable.icon_health),
-                ExpenseCategoryEntity(0, "Personal Care", R.drawable.icon_personal_care),
-                ExpenseCategoryEntity(0, "Education", R.drawable.icon_education),
-                ExpenseCategoryEntity(0, "Bill and Utilities", R.drawable.icon_bill),
-                ExpenseCategoryEntity(0, "Investment", R.drawable.icon_investment),
-                ExpenseCategoryEntity(0, "Rent", R.drawable.icon_rent),
-                ExpenseCategoryEntity(0, "Taxes", R.drawable.icon_tex),
-                ExpenseCategoryEntity(0, "Insurance", R.drawable.icon_insurance),
-                ExpenseCategoryEntity(0, "Gifts & Donation", R.drawable.icon_gift)
+                ExpenseCategoryEntity(0, "Food & Dining", R.drawable.food1),
+                ExpenseCategoryEntity(0, "Shopping", R.drawable.shop1),
+                ExpenseCategoryEntity(0, "Travel", R.drawable.travel1),
+                ExpenseCategoryEntity(0, "Entertainment", R.drawable.entertainment1),
+                ExpenseCategoryEntity(0, "Health", R.drawable.medical1),
+                ExpenseCategoryEntity(0, "Personal Care", R.drawable.miscal9),
+                ExpenseCategoryEntity(0, "Education", R.drawable.education_icon),
+                ExpenseCategoryEntity(0, "Bill and Utilities", R.drawable.utilite1),
+                ExpenseCategoryEntity(0, "Investment", R.drawable.fiannce1),
+                ExpenseCategoryEntity(0, "Rent", R.drawable.miscal3),
+                ExpenseCategoryEntity(0, "Taxes", R.drawable.utilite8),
+                ExpenseCategoryEntity(0, "Insurance", R.drawable.fiannce11),
+                ExpenseCategoryEntity(0, "Gifts & Donation", R.drawable.family3)
+
+            )
+            val incomeCategories = listOf(
+                IncomeCategoryEntity(0, "Other", R.drawable.more),
+                IncomeCategoryEntity(0, "Salary", R.drawable.fiannce7),
+                IncomeCategoryEntity(0, "Solid Items", R.drawable.fiannce10),
+                IncomeCategoryEntity(0, "Coupons", R.drawable.fiannce4),
+
 
             )
 
             // Insert categories into the database
-            categories.forEach { category ->
+            expenseCategories.forEach { category ->
                 expenseCategoryDao.insert(category)
+            }
+
+            incomeCategories.forEach{ category ->
+                incomeCategoryDao.insert(category)
+
             }
 
             val editor = populateExCategory.edit()
@@ -96,6 +115,7 @@ class SplashActivity : AppCompatActivity() {
         }
 
         // Fetch data after insertion
-        mList.addAll(expenseCategoryDao.getAll())
+//        expenseList.addAll(expenseCategoryDao.getAll())
+//        incomeList.addAll(incomeCategoryDao.getAll())
     }
 }

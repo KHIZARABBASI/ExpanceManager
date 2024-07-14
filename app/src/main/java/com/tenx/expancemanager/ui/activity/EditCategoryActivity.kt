@@ -1,48 +1,169 @@
 package com.tenx.expancemanager.ui.activity
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.tenx.expancemanager.R
+import com.tenx.expancemanager.adopter.edit_category.RvCategoriesAdopter
 import com.tenx.expancemanager.databinding.ActivityEditCategoryBinding
 import com.tenx.expancemanager.model.CategoriesImgModel
 import com.tenx.expancemanager.model.CategoryImgModel
 
 class EditCategoryActivity : AppCompatActivity() {
-    val binding : ActivityEditCategoryBinding by lazy {
+    val binding: ActivityEditCategoryBinding by lazy {
         ActivityEditCategoryBinding.inflate(layoutInflater)
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        val mList= ArrayList<CategoriesImgModel>()
+        val mList = ArrayList<CategoriesImgModel>()
         val foodList = ArrayList<CategoryImgModel>()
+        val travelList = ArrayList<CategoryImgModel>()
+        val shoppingList = ArrayList<CategoryImgModel>()
+        val familyList = ArrayList<CategoryImgModel>()
+        val entertainmentList = ArrayList<CategoryImgModel>()
+        val businessList = ArrayList<CategoryImgModel>()
+        val financeList = ArrayList<CategoryImgModel>()
+        val medicalList = ArrayList<CategoryImgModel>()
+        val utilList = ArrayList<CategoryImgModel>()
+        val miscUtilsList = ArrayList<CategoryImgModel>()
 
-        foodList.add(CategoryImgModel(R.drawable.tea))
-        foodList.add(CategoryImgModel(R.drawable.shrimp))
-        foodList.add(CategoryImgModel(R.drawable.salad))
-        foodList.add(CategoryImgModel(R.drawable.roasted_chicken))
-        foodList.add(CategoryImgModel(R.drawable.pizza))
-        foodList.add(CategoryImgModel(R.drawable.noodles))
-        foodList.add(CategoryImgModel(R.drawable.fried_egg))
-        foodList.add(CategoryImgModel(R.drawable.french_fries))
-        foodList.add(CategoryImgModel(R.drawable.food))
-        foodList.add(CategoryImgModel(R.drawable.food_cart))
-        foodList.add(CategoryImgModel(R.drawable.fast_food))
-        foodList.add(CategoryImgModel(R.drawable.drink))
-        foodList.add(CategoryImgModel(R.drawable.donut))
-        foodList.add(CategoryImgModel(R.drawable.diet))
-        foodList.add(CategoryImgModel(R.drawable.cooking))
-        foodList.add(CategoryImgModel(R.drawable.chili_pepper))
-        foodList.add(CategoryImgModel(R.drawable.biryani))
+        // Add icons to the lists food
+        foodList.add(CategoryImgModel(R.drawable.food1))
+        foodList.add(CategoryImgModel(R.drawable.food2))
+        foodList.add(CategoryImgModel(R.drawable.food3))
+        foodList.add(CategoryImgModel(R.drawable.food4))
+        foodList.add(CategoryImgModel(R.drawable.food5))
+        foodList.add(CategoryImgModel(R.drawable.food6))
+        foodList.add(CategoryImgModel(R.drawable.food7))
+        foodList.add(CategoryImgModel(R.drawable.food8))
+        foodList.add(CategoryImgModel(R.drawable.food9))
+        foodList.add(CategoryImgModel(R.drawable.food10))
+        foodList.add(CategoryImgModel(R.drawable.food11))
+        foodList.add(CategoryImgModel(R.drawable.food12))
+        foodList.add(CategoryImgModel(R.drawable.food13))
+        foodList.add(CategoryImgModel(R.drawable.food14))
+        foodList.add(CategoryImgModel(R.drawable.food15))
+        foodList.add(CategoryImgModel(R.drawable.food16))
+        foodList.add(CategoryImgModel(R.drawable.food17))
 
-        mList.add(CategoriesImgModel("name", foodList))
 
+        // Add icons to the lists travel
+        travelList.add(CategoryImgModel(R.drawable.travel1))
+        travelList.add(CategoryImgModel(R.drawable.travel2))
+        travelList.add(CategoryImgModel(R.drawable.travel3))
+        travelList.add(CategoryImgModel(R.drawable.travel4))
+        travelList.add(CategoryImgModel(R.drawable.travel5))
+        travelList.add(CategoryImgModel(R.drawable.travel6))
+        travelList.add(CategoryImgModel(R.drawable.travel7))
+        travelList.add(CategoryImgModel(R.drawable.travel8))
+        travelList.add(CategoryImgModel(R.drawable.travel9))
+        travelList.add(CategoryImgModel(R.drawable.travel10))
+        travelList.add(CategoryImgModel(R.drawable.travel11))
+        travelList.add(CategoryImgModel(R.drawable.travel12))
+
+
+        // Add icons to the lists shoping
+        shoppingList.add(CategoryImgModel(R.drawable.shop1))
+        shoppingList.add(CategoryImgModel(R.drawable.shop2))
+        shoppingList.add(CategoryImgModel(R.drawable.shop3))
+        shoppingList.add(CategoryImgModel(R.drawable.shop4))
+        shoppingList.add(CategoryImgModel(R.drawable.shop5))
+        shoppingList.add(CategoryImgModel(R.drawable.shop6))
+        shoppingList.add(CategoryImgModel(R.drawable.shop7))
+        shoppingList.add(CategoryImgModel(R.drawable.shop8))
+        shoppingList.add(CategoryImgModel(R.drawable.shop9))
+        shoppingList.add(CategoryImgModel(R.drawable.shop10))
+
+        // Add icons to the lists family
+        familyList.add(CategoryImgModel(R.drawable.family1))
+        familyList.add(CategoryImgModel(R.drawable.family2))
+        familyList.add(CategoryImgModel(R.drawable.family3))
+        familyList.add(CategoryImgModel(R.drawable.family4))
+
+        // Add icons to the lists entertainment
+        entertainmentList.add(CategoryImgModel(R.drawable.entertainment1))
+        entertainmentList.add(CategoryImgModel(R.drawable.entertainment2))
+        entertainmentList.add(CategoryImgModel(R.drawable.entertainment3))
+        entertainmentList.add(CategoryImgModel(R.drawable.entertainment4))
+
+        // Add icons to the lists business
+        businessList.add(CategoryImgModel(R.drawable.business1))
+        businessList.add(CategoryImgModel(R.drawable.business2))
+        businessList.add(CategoryImgModel(R.drawable.business3))
+        businessList.add(CategoryImgModel(R.drawable.business4))
+
+
+        // Add icons to the lists finance
+        financeList.add(CategoryImgModel(R.drawable.fiannce1))
+        financeList.add(CategoryImgModel(R.drawable.fiannce3))
+        financeList.add(CategoryImgModel(R.drawable.fiannce2))
+        financeList.add(CategoryImgModel(R.drawable.fiannce4))
+        financeList.add(CategoryImgModel(R.drawable.fiannce5))
+        financeList.add(CategoryImgModel(R.drawable.fiannce6))
+        financeList.add(CategoryImgModel(R.drawable.fiannce7))
+        financeList.add(CategoryImgModel(R.drawable.fiannce8))
+        financeList.add(CategoryImgModel(R.drawable.fiannce9))
+        financeList.add(CategoryImgModel(R.drawable.fiannce10))
+        financeList.add(CategoryImgModel(R.drawable.fiannce11))
+
+
+        // Add icons to the lists medical
+        medicalList.add(CategoryImgModel(R.drawable.medical1))
+        medicalList.add(CategoryImgModel(R.drawable.medical2))
+        medicalList.add(CategoryImgModel(R.drawable.medical3))
+        medicalList.add(CategoryImgModel(R.drawable.medical4))
+        medicalList.add(CategoryImgModel(R.drawable.medical5))
+
+
+        // Add icons to the lists utilites
+        utilList.add(CategoryImgModel(R.drawable.utilite1))
+        utilList.add(CategoryImgModel(R.drawable.utilite2))
+        utilList.add(CategoryImgModel(R.drawable.utilite3))
+        utilList.add(CategoryImgModel(R.drawable.utilite4))
+        utilList.add(CategoryImgModel(R.drawable.utilite5))
+        utilList.add(CategoryImgModel(R.drawable.utilite6))
+        utilList.add(CategoryImgModel(R.drawable.utilite7))
+        utilList.add(CategoryImgModel(R.drawable.utilite8))
+
+
+
+
+        // Add icons to the lists miscu
+        miscUtilsList.add(CategoryImgModel(R.drawable.miscal1))
+        miscUtilsList.add(CategoryImgModel(R.drawable.miscal2))
+        miscUtilsList.add(CategoryImgModel(R.drawable.miscal3))
+        miscUtilsList.add(CategoryImgModel(R.drawable.miscal4))
+        miscUtilsList.add(CategoryImgModel(R.drawable.miscal5))
+        miscUtilsList.add(CategoryImgModel(R.drawable.miscal6))
+        miscUtilsList.add(CategoryImgModel(R.drawable.miscal7))
+        miscUtilsList.add(CategoryImgModel(R.drawable.miscal8))
+        miscUtilsList.add(CategoryImgModel(R.drawable.miscal9))
+
+        // Add categories to the main list
+        mList.add(CategoriesImgModel("Food", foodList))
+        mList.add(CategoriesImgModel("Travel", travelList))
+        mList.add(CategoriesImgModel("Shopping", shoppingList))
+        mList.add(CategoriesImgModel("Shopping", familyList))
+        mList.add(CategoriesImgModel("Shopping", entertainmentList))
+        mList.add(CategoriesImgModel("Shopping", businessList))
+        mList.add(CategoriesImgModel("Shopping", financeList))
+        mList.add(CategoriesImgModel("Shopping", medicalList))
+        mList.add(CategoriesImgModel("Shopping", utilList))
+        mList.add(CategoriesImgModel("Shopping", miscUtilsList))
+
+        val adapter = RvCategoriesAdopter(this, mList)
+        binding.rvEdit.adapter = adapter
+
+        try {
+            Toast.makeText(this, "Successful", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Log.e("EditCategoryActivity", "Error setting adapter: $e")
+        }
     }
 }

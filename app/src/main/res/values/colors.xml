@@ -10,6 +10,7 @@
     <color name="btn_gmail_color">#D80808</color>
     <color name="btn_phone_color">#2FB192</color>
     <color name="btn_premitive_color">#E3E3E3</color>
+    <color name="switch_btn">#43434370</color>
 
 <!--    text-->
     <color name="primery_text_color">#000000</color>
