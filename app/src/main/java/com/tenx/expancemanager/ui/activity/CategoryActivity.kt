@@ -35,6 +35,7 @@ class CategoryActivity : AppCompatActivity() {
                 val mList = expenseCategoryDao.getAll() as ArrayList<ExpenseCategoryEntity>
                 val adapter = RecyclerExpanseGridCategoryAdopter(mList)
                 binding.rvRecyclerCategory.adapter = adapter
+                adapter.notifyDataSetChanged()
             } catch (e: Exception) {
                 Log.e("ExpenseFragment", "Error fetching categories: ${e.message}")
             }

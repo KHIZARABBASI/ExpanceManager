@@ -53,6 +53,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.crashlytics.buildtools)
+    implementation(libs.androidx.core.i18n)
+    implementation(libs.androidx.media3.common)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -86,7 +88,8 @@ dependencies {
     //glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
 
-
+    
+    implementation("com.google.android.material:material:1.3.0-alpha02")
 
 
 

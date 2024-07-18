@@ -12,7 +12,7 @@ data class TransctionEntity(
     @ColumnInfo(name = "amount")
     val amount: Int = 0,
     @ColumnInfo(name = "date")
-    val date: String ,
+    val date: String,
     @ColumnInfo(name = "time")
     val time: String = "",
     @ColumnInfo(name = "category")
@@ -22,9 +22,12 @@ data class TransctionEntity(
     @ColumnInfo(name = "notes")
     val note: String? = null,
     @ColumnInfo(name = "tag")
-    val tag: String?=null ,
+    val tag: String?=null,
     @ColumnInfo(name = "img_category")
-    val imgCategory: Int , // Assuming these fields exist
+    val imgCategory: Int, // Assuming these fields exist
     @ColumnInfo(name = "img")
-    val img: Int
+    val img: Int,
+    @ColumnInfo(name = "type")
+    val type: String
+
 )

@@ -87,5 +87,7 @@ Track your spending &amp; income.
     <string name="week">week</string>
     <string name="year">Year</string>
 
+    <string name="budget_analyser">Budget Analyser</string>
+
 
 </resources>

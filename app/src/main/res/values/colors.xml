@@ -9,7 +9,7 @@
     <color name="btn_primary_color">#D9D9D9</color>
     <color name="btn_gmail_color">#D80808</color>
     <color name="btn_phone_color">#2FB192</color>
-    <color name="btn_premitive_color">#E3E3E3</color>
+    <color name="btn_premitive_color">#E0E0E0</color>
     <color name="switch_btn">#43434370</color>
 
 <!--    text-->
@@ -42,5 +42,8 @@
     <color name="nav_drawer_bg_color">#1D1B1B</color>
     <color name="nav_drawer_premium_bg_color">#0FD1D10F</color>
 
+<!--    budget background-->
+
+    <color name="budget_background">#504F5699</color>
 
 </resources>

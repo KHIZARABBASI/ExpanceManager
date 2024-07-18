@@ -52,7 +52,7 @@
 
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/khula_bold"
@@ -67,7 +67,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView3" />
+                app:layout_constraintStart_toEndOf="@+id/tv_title" />
 
 
 

@@ -2,24 +2,41 @@ package com.tenx.expancemanager.ui.activity
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.tenx.expancemanager.R
 import com.tenx.expancemanager.adopter.edit_category.RvCategoriesAdopter
+import com.tenx.expancemanager.database.appDatabase.AppDatabase
+import com.tenx.expancemanager.database.dao.ExpenseCategoryDao
+import com.tenx.expancemanager.database.entity.ExpenseCategoryEntity
 import com.tenx.expancemanager.databinding.ActivityEditCategoryBinding
 import com.tenx.expancemanager.model.CategoriesImgModel
 import com.tenx.expancemanager.model.CategoryImgModel
+import kotlinx.coroutines.launch
 
-class EditCategoryActivity : AppCompatActivity() {
-    val binding: ActivityEditCategoryBinding by lazy {
-        ActivityEditCategoryBinding.inflate(layoutInflater)
-    }
+class EditCategoryActivity : AppCompatActivity(), RvCategoriesAdopter.OnItemClickListener {
+    private lateinit var binding: ActivityEditCategoryBinding
+    private lateinit var db: AppDatabase
+    private lateinit var expenseCategoryDao: ExpenseCategoryDao
+    private  var selectedImageResId: Int =R.drawable.entertainment1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        binding = ActivityEditCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        db = AppDatabase.getDatabase(this@EditCategoryActivity)
+        expenseCategoryDao = db.expenseCategoryDao()
+
+        lifecycleScope.launch {
+            clickListener()
+        }
+
 
         val mList = ArrayList<CategoriesImgModel>()
         val foodList = ArrayList<CategoryImgModel>()
@@ -132,8 +149,6 @@ class EditCategoryActivity : AppCompatActivity() {
         utilList.add(CategoryImgModel(R.drawable.utilite8))
 
 
-
-
         // Add icons to the lists miscu
         miscUtilsList.add(CategoryImgModel(R.drawable.miscal1))
         miscUtilsList.add(CategoryImgModel(R.drawable.miscal2))
@@ -157,7 +172,7 @@ class EditCategoryActivity : AppCompatActivity() {
         mList.add(CategoriesImgModel("Shopping", utilList))
         mList.add(CategoriesImgModel("Shopping", miscUtilsList))
 
-        val adapter = RvCategoriesAdopter(this, mList)
+        val adapter = RvCategoriesAdopter(this, mList, this@EditCategoryActivity)
         binding.rvEdit.adapter = adapter
 
         try {
@@ -166,4 +181,27 @@ class EditCategoryActivity : AppCompatActivity() {
             Log.e("EditCategoryActivity", "Error setting adapter: $e")
         }
     }
+
+    private suspend fun clickListener() {
+
+        binding.fabAddCategry.setOnClickListener {
+            lifecycleScope.launch {
+                expenseCategoryDao.insert(
+                    ExpenseCategoryEntity(
+                        0,
+                        binding.tvCategoryName.text.toString(),
+                        selectedImageResId
+                    )
+                )
+            }
+
+        }
+
+    }
+
+    override fun onItemClick(item: CategoryImgModel) {
+        Glide.with(this).load(item.img).into(binding.ciSetCategoryImg)
+        selectedImageResId = item.img
+    }
+
 }

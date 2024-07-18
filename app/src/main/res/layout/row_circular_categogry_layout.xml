@@ -26,8 +26,7 @@
             android:layout_height="@dimen/_45sdp"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/icon_sort"
-            app:civ_border_color="#FF000000"
-            app:civ_border_width=".1dp"
+            android:padding="@dimen/_5sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -38,6 +37,7 @@
             android:fontFamily="@font/khula"
             android:layout_height="wrap_content"
             android:text="@string/cash"
+            android:textColor="@color/black"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/constraintLayout8"

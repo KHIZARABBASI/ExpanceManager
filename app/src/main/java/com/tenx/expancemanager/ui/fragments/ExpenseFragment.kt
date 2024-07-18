@@ -26,7 +26,6 @@ import com.tenx.expancemanager.database.entity.ExpenseCategoryEntity
 import com.tenx.expancemanager.database.entity.ExpenseEntity
 import com.tenx.expancemanager.database.entity.TransctionEntity
 import com.tenx.expancemanager.databinding.FragmentExpenseBinding
-import com.tenx.expancemanager.databinding.FragmentIncomBinding
 import com.tenx.expancemanager.databinding.LayoutBottomSheetCategoryBinding
 import com.tenx.expancemanager.databinding.LayoutBottomSheetPaymentMethodBinding
 import com.tenx.expancemanager.ui.activity.DashboardActivity
@@ -196,7 +195,7 @@ class ExpenseFragment : Fragment(),RvExpanseCategoryAdopter.OnItemClickListener 
     ) {
         val user =
             ExpenseEntity(0, amount, date, time, category, payment, note, tag, img, imgCategory)
-        val user1 = TransctionEntity(0, amount, date, time, category, payment, note, tag, img, imgCategory)
+        val user1 = TransctionEntity(0, amount, date, time, category, payment, note, tag, img, imgCategory,"expense")
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 tarnsectionDao.insert(user1)

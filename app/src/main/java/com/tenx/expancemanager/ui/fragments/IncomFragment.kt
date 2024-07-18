@@ -72,10 +72,8 @@ class IncomFragment : Fragment(), RvIncomeCategoryAdopter.OnItemClickListener {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
 
         cal = android.icu.util.Calendar.getInstance()
-        binding.tvDate.text =
-            SimpleDateFormat("dd.MM.yyyy", Locale.US).format(System.currentTimeMillis())
-        binding.tvTime.text =
-            SimpleDateFormat("h:mm a", Locale.US).format(System.currentTimeMillis())
+        binding.tvDate.text = SimpleDateFormat("dd.MM.yyyy", Locale.US).format(System.currentTimeMillis())
+        binding.tvTime.text = SimpleDateFormat("h:mm a", Locale.US).format(System.currentTimeMillis())
 
         dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             cal.set(android.icu.util.Calendar.YEAR, year)
@@ -238,7 +236,7 @@ class IncomFragment : Fragment(), RvIncomeCategoryAdopter.OnItemClickListener {
         val income =
             IncomeEntity(0, amount, date, time, category, payment, note, tag, img, imgCategory)
         val transaction =
-            TransctionEntity(0, amount, date, time, category, payment, note, tag, img, imgCategory)
+            TransctionEntity(0, amount, date, time, category, payment, note, tag, img, imgCategory, "income")
 
         lifecycleScope.launch(Dispatchers.IO) {
             try {

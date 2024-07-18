@@ -2,6 +2,7 @@ package com.tenx.expancemanager.ui.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,13 +11,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tenx.expancemanager.R
 import com.tenx.expancemanager.adopter.RecyclerTransecionAdopter
 import com.tenx.expancemanager.database.appDatabase.AppDatabase
 import com.tenx.expancemanager.database.dao.ExpenseDao
 import com.tenx.expancemanager.database.dao.IncomeDao
+import com.tenx.expancemanager.database.dao.TransctionDao
 import com.tenx.expancemanager.database.entity.ExpenseEntity
 import com.tenx.expancemanager.database.entity.IncomeEntity
+import com.tenx.expancemanager.database.entity.TransctionEntity
 import com.tenx.expancemanager.databinding.FragmentHomeBinding
+import com.tenx.expancemanager.databinding.LayoutNavDrawarHeaderBinding
+import com.tenx.expancemanager.ui.activity.TransactionActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -24,10 +30,11 @@ import java.util.Calendar
 
 class HomeFragment : Fragment() {
 
-    private lateinit var mList: ArrayList<Any>
+    private lateinit var mList: ArrayList<TransctionEntity>
     private lateinit var adapter: RecyclerTransecionAdopter
     private lateinit var expenseDao: ExpenseDao
     private lateinit var incomeDao: IncomeDao
+    private lateinit var transctionDao: TransctionDao
     private lateinit var db: AppDatabase
 
     private val binding: FragmentHomeBinding by lazy {
@@ -42,13 +49,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        db = AppDatabase.getDatabase(requireContext())
-        expenseDao = db.expenseDao()
-        incomeDao = db.incomeDao()
-        adapter = RecyclerTransecionAdopter(emptyList())
 
-        binding.rvExpanseList.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvExpanseList.adapter = adapter
+
 
         lifecycleScope.launch {
             initVar()
@@ -58,7 +60,7 @@ class HomeFragment : Fragment() {
         generateTransactionList()
         selectCurrency()
         clickListner()
-        navDrawer()
+        setupNavDrawer()
         lifecycleScope.launch {
             setValues()
         }
@@ -96,13 +98,21 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun navDrawer() {
-        // Setup your navigation drawer here
+    private fun setupNavDrawer() {
+        val headerBinding = LayoutNavDrawarHeaderBinding.inflate(layoutInflater)
+        binding.ndNavigation.addHeaderView(headerBinding.root)
+
+
+
     }
 
     private fun clickListner() {
         binding.setting.setOnClickListener {
             binding.root.openDrawer(binding.ndNavigation)
+        }
+
+        binding.tvSeeAll.setOnClickListener{
+            startActivity(Intent(requireContext(), TransactionActivity::class.java))
         }
     }
 
@@ -110,6 +120,7 @@ class HomeFragment : Fragment() {
         if (mList.isNotEmpty()) {
             binding.rvExpanseList.visibility = View.VISIBLE
             binding.clNoItem.visibility = View.INVISIBLE
+            binding.rvExpanseList.adapter = adapter
         } else {
             binding.rvExpanseList.visibility = View.INVISIBLE
             binding.clNoItem.visibility = View.VISIBLE
@@ -122,15 +133,15 @@ class HomeFragment : Fragment() {
     }
 
     private suspend fun initVar() {
-        withContext(Dispatchers.IO) {
-            val expenses = expenseDao.getAll()
-            val incomes = incomeDao.getAll()
-            mList = ArrayList<Any>().apply {
-                addAll(expenses)
-                addAll(incomes)
-            }
-        }
-        adapter.updateList(mList)
+        db = AppDatabase.getDatabase(requireContext())
+        expenseDao = db.expenseDao()
+        incomeDao = db.incomeDao()
+        transctionDao = db.transectionDao()
+        mList = transctionDao.getAll() as ArrayList<TransctionEntity>
+        adapter = RecyclerTransecionAdopter(requireContext(),mList)
+
+        binding.rvExpanseList.layoutManager = LinearLayoutManager(requireContext())
+
     }
 
     private fun selectCurrency() {
